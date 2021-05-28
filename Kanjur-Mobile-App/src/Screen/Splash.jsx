@@ -7,7 +7,7 @@ export default function Splash({navigation}) {
     useEffect(() => {
         setTimeout(() => {
             navigation.replace('Home')
-        }, 5000)
+        }, 3000)
     })
     return (
         <View style={styles.container}>

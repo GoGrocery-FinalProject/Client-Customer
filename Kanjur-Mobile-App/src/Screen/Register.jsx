@@ -1,14 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { Button } from 'react-native-paper';
 
 export default function Register({navigation}) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [phone, setPhone] = useState('')
 
     return (
         <View style={styles.container}>
-            <Text>Register</Text>
-            <Image style={styles.logo} source={{uri: 'https://image.freepik.com/free-vector/click-collect-detailed-logo-sign_23-2148789056.jpg'}} />
+            {/* <Text style={styles.title}>Login</Text> */}
+            <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
+            <TextInput 
+                style={styles.input} 
+                placeholder="No Telepon"
+                keyboardType='number-pad'
+                onChangeText={setPhone} 
+                value={phone}
+                
+            />
+            <TextInput 
+                style={styles.input} 
+                placeholder="Email"
+                keyboardType='email-address'
+                onChangeText={setEmail} 
+                value={email}
+                
+            />
+            <TextInput 
+                style={styles.input} 
+                placeholder="Password"
+                onChangeText={setPassword} 
+                secureTextEntry
+                value={password}
+            />
+            <Button color="#fff" mode="flat" style={styles.button} onPress={() => console.log('register')}>Register</Button>
+            <View style={styles.line} />
+            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => console.log('google login')}>Masuk dengan Google</Button>
+
         <StatusBar style="auto" />
       </View>
   );
@@ -17,12 +48,56 @@ export default function Register({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0095DA',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: widthPercentageToDP('7%'),
+    color: '#FB5533'
+  },
+  input: {
+      backgroundColor: '#d4d4d4',
+      color: 'black',
+      height: heightPercentageToDP('8%'),
+      width: widthPercentageToDP('70%'),
+      borderRadius: 5,
+      marginVertical: heightPercentageToDP('1.5%'),
+      paddingHorizontal: widthPercentageToDP('4%')
+  },
+  button: {
+    backgroundColor: '#FB5533',
+    height: heightPercentageToDP('8%'),
+    width: widthPercentageToDP('70%'),
+    borderRadius: 5,
+    justifyContent: 'center',
+    marginVertical: heightPercentageToDP('1.5%'),
+  },
+  line: {
+    width: widthPercentageToDP('70%'),
+    height: 1, 
+    backgroundColor: '#c4c4c4',
+    marginVertical: heightPercentageToDP('1.5%')
+  },
+  text: {
+      fontWeight: 'bold',
+      fontFamily: 'Roboto',
+      fontSize: widthPercentageToDP('3.5%'),
+      marginVertical: heightPercentageToDP('1.5%')
+  },
+  buttonGoogle: {
+      backgroundColor: '#0095DA',
+      height: heightPercentageToDP('8%'),
+      width: widthPercentageToDP('70%'),
+      borderRadius: 5,
+      justifyContent: 'center',
+      marginVertical: heightPercentageToDP('1.5%'),
+  },
   logo: {
-      width: widthPercentageToDP('60%'),
-      height: heightPercentageToDP('50%')
+      width: widthPercentageToDP('50%'),
+      height: heightPercentageToDP('10%'),
+      marginBottom: heightPercentageToDP('2%')
   }
 });

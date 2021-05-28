@@ -19,8 +19,8 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} options={{ headerShown : false }} />
+          <Stack.Screen name="Login" component={Login} options={{ headerStyle: {backgroundColor: '#0095DA'}}}/>
+          <Stack.Screen name="Register" component={Register} options={{ headerStyle: {backgroundColor: '#FB5533'}}} />
           <Stack.Screen name="Transaction" component={Transaction} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
