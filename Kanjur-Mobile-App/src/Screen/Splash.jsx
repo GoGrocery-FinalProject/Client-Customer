@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
 export default function Splash({navigation}) {
     useEffect(() => {
@@ -10,7 +11,7 @@ export default function Splash({navigation}) {
     })
     return (
         <View style={styles.container}>
-        <Text>Nnati disini ada logo App / gambar buat splash</Text>
+            <Image style={styles.logo} source={{uri: 'https://image.freepik.com/free-vector/click-collect-detailed-logo-sign_23-2148789056.jpg'}} />
         <StatusBar style="auto" />
       </View>
   );
@@ -23,4 +24,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logo: {
+      width: widthPercentageToDP('60%'),
+      height: heightPercentageToDP('50%')
+  }
 });

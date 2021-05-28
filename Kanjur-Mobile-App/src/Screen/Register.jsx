@@ -3,11 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
-export default function Login({navigation}) {
+export default function Register({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text>Login</Text>
+            <Text>Register</Text>
             <Image style={styles.logo} source={{uri: 'https://image.freepik.com/free-vector/click-collect-detailed-logo-sign_23-2148789056.jpg'}} />
         <StatusBar style="auto" />
       </View>

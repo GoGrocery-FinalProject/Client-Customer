@@ -7,6 +7,8 @@ import Login from './src/Screen/Login';
 import { Provider as ReduxProvider } from 'react-redux'
 import { store } from './store';
 import Splash from './src/Screen/Splash';
+import Register from './src/Screen/Register';
+import Transaction from './src/Screen/Transaction';
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -18,6 +20,8 @@ export default function App() {
           <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown : false }} />
+          <Stack.Screen name="Transaction" component={Transaction} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </ReduxProvider>
