@@ -6,6 +6,7 @@ import Home from './src/Screen/Home';
 import Login from './src/Screen/Login';
 import { Provider as ReduxProvider } from 'react-redux'
 import { store } from './store';
+import Splash from './src/Screen/Splash';
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -14,6 +15,7 @@ export default function App() {
     <ReduxProvider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         </Stack.Navigator>
