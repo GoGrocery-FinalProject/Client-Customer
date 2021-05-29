@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
+import { setToken } from '../../asyncStorage';
 
 export default function Login({navigation}) {
     const [email, setEmail] = useState('')
@@ -26,7 +27,7 @@ export default function Login({navigation}) {
                 secureTextEntry
                 value={password}
             />
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => console.log('login')}>Login</Button>
+            <Button color="#fff" mode="flat" style={styles.button} onPress={() => setToken(email)}>Login</Button>
             <View style={styles.line} />
             <Text style={styles.text}>Tidak memiliki akun ?</Text>
             <Button color="#fff" mode="flat" style={styles.button} onPress={() => navigation.navigate('Register')}>Register Disini</Button>

@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { getToken } from '../../asyncStorage';
 
 export default function Splash({navigation}) {
     useEffect(() => {
         setTimeout(() => {
-            navigation.replace('Home')
+            getToken(navigation)
         }, 3000)
     })
     return (

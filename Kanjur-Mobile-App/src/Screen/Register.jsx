@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
 
-export default function Register({navigation}) {
+export default function Register({navigation, route}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
@@ -38,7 +38,7 @@ export default function Register({navigation}) {
             />
             <Button color="#fff" mode="flat" style={styles.button} onPress={() => console.log('register')}>Register</Button>
             <View style={styles.line} />
-            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => console.log('google login')}>Masuk dengan Google</Button>
+            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('CheckIn')}>Masuk dengan Google</Button>
 
         <StatusBar style="auto" />
       </View>

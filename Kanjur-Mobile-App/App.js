@@ -9,6 +9,7 @@ import { store } from './store';
 import Splash from './src/Screen/Splash';
 import Register from './src/Screen/Register';
 import Transaction from './src/Screen/Transaction';
+import CheckIn from './src/Screen/CheckIn';
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -21,6 +22,7 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerStyle: {backgroundColor: '#0095DA'}}}/>
           <Stack.Screen name="Register" component={Register} options={{ headerStyle: {backgroundColor: '#FB5533'}}} />
+          <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Transaction" component={Transaction} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
