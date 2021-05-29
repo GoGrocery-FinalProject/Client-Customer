@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { Button } from 'react-native-paper'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
-export default function CheckIn() {
+export default function CheckIn({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -16,7 +17,13 @@ export default function CheckIn() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    console.log(data, '======datanya');
+    if (data === 'https://me-qr.com/549273') {
+      navigation.navigate('Transaction')
+      console.log('masuk');
+    } else {
+      alert('Barcode yang anda scan tidak terdaftar dalam Sistem kami')
+    }
   };
 
   return (
@@ -32,7 +39,7 @@ export default function CheckIn() {
         />
         }
       
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      {scanned && <Button style={styles.button} color='#fff' onPress={() => setScanned(false)}>Scan Ulang</Button>}
 
       <Text style={styles.text}>Scan barcode kantin disini untuk memulai belanja</Text>
     </View>
@@ -87,5 +94,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: widthPercentageToDP('3%'),
     textAlign: 'center'
+  },
+  button: {
+    backgroundColor: '#FB5533',
+    height: heightPercentageToDP('5%'),
+    width: widthPercentageToDP('60%'),
+    borderRadius: 5,
+    justifyContent: 'center',
+    marginVertical: heightPercentageToDP('1.5%'),
   }
 });

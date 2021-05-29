@@ -15,7 +15,7 @@ export const getToken = async (navigation) => {
         if(token === null) {
             navigation.replace('Home')
         } else {
-            navigation.replace('Register', {name: token})
+            navigation.replace('Transaction')
         }
         return token
     } catch (e) {

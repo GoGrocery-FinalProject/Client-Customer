@@ -5,7 +5,13 @@ import { SET_CART, SET_LOADING, SET_ERROR } from './constants'
 const initialState = {
     cart: [{name: 'test', qty: 2}],
     loading: true,
-    error: null
+    error: null,
+    banner: [
+        "https://static-siplah.blibli.com/static/img/banner-desktop.c6b8521.png",
+        "https://assets-us-01.kc-usercontent.com/a7507759-f4f5-0038-8fff-c1db251108c1/845a7c24-311a-4267-88f9-a28f4009c1cc/Blibli-Diskon%20150.000_WEB%20BANNER.jpg",
+        "https://www.blibli.com/page/wp-content/uploads/Ulas-Puas-Banner-utama1.jpg",
+        "https://static-siplah.blibli.com/data/sellerBanner/SJPS-0001/452e63f2-9b00-404f-95d0-1fe90559f471.jpg"
+      ]
 }
 
 function reducer (state = initialState, action) {
