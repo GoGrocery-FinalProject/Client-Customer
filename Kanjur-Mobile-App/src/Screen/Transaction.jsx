@@ -1,44 +1,45 @@
-import React, { useState } from 'react'
-// import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, Platform, StatusBar } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { useSelector } from 'react-redux';
-import { SliderBox } from 'react-native-image-slider-box'
+import Slider from '../Component/Slider'
 import Card from '../Component/Card';
+import ActionBox from '../Component/ActionBox';
+import StatusBarLight from '../Component/StatusBarLight'
+import { Avatar, IconButton } from 'react-native-paper';
+import { clearAsyncStorage, getUsername } from '../../asyncStorage';
 
 export default function Transaction({navigation}) {
-  const banner = useSelector(state => state.banner)
-  const total = useState(0)
+  const [total, setTotal] = useState(11000)
+  const username = getUsername._W
 
   return (
     <>
     <View style={styles.container}>
       <View style={styles.boxHeader}>
+        <View style={styles.userContainer}>
+          <Avatar.Icon style={styles.avatar} icon='account-outline' size={24} color='#0095DA' backgroundColor='#fff' />
+          <Text style={styles.user}>{username}</Text>
+          <IconButton icon="power" size={24} color="yellow" onPress={() => clearAsyncStorage(navigation)} />
+        </View>
         <View style={styles.totalContainer}>
           <Text style={styles.total}>Total belanja:</Text>
           <Text style={styles.totalPrice}>Rp. {total},-</Text>
         </View>
       </View>
-      <View style={styles.actionBox}>
-
-      </View>
+      <ActionBox />
       <ScrollView>
-        <SliderBox 
-          images={banner}
-          sliderBoxHeight={heightPercentageToDP('25%')}
-          dotColor="#0095DA"
-          autoplay
-          circleLoop
-        >
-        </SliderBox>
+        <Slider />
         <View>
-          <Text style={styles.keranjang}>Keranjang Belanja</Text>
+          <View style={styles.containerTitleCart}>
+            <Text style={styles.keranjang}>Keranjang Belanja</Text>
+            <IconButton icon="delete" size={widthPercentageToDP('5%')} color="red" onPress={() => console.log('CLEAR CART')} />
+          </View>
           <Card />
           <Card />
           <Card />
         </View>
       </ScrollView>
-      <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
+      <StatusBarLight />
     </View>
     </>
   );
@@ -51,35 +52,27 @@ const styles = StyleSheet.create({
   },
   boxHeader: {
     width: widthPercentageToDP('100%'),
-    height: heightPercentageToDP('26%'),
+    height: heightPercentageToDP('29%'),
     backgroundColor: '#0095DA',
-    marginBottom: heightPercentageToDP('13%'),
-    alignItems: 'center'
+    marginBottom: heightPercentageToDP('9.5%'),
   },
   keranjang: {
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: widthPercentageToDP('4.5%'),
-    marginLeft: widthPercentageToDP('6%'),
     paddingVertical: heightPercentageToDP('1%')
   },
-  actionBox: {
-    backgroundColor: '#fff',
-    // shadowColor: 'black',
-    position: 'absolute',
-    height: heightPercentageToDP('20%'),
-    width: widthPercentageToDP('90%'),
-    left: widthPercentageToDP('5%'),
-    top: heightPercentageToDP('17%'),
-    borderRadius: 5
-  },
   totalContainer: {
-    marginTop: Platform.OS === 'android'? StatusBar.currentHeight : 0,
-    paddingVertical: heightPercentageToDP('4%'),
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'space-between',
     marginHorizontal: widthPercentageToDP('5%')
+  },
+  userContainer: {
+    marginTop: Platform.OS === 'android'? StatusBar.currentHeight : 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   total: {
     width: widthPercentageToDP('42.5%'),
@@ -96,5 +89,19 @@ const styles = StyleSheet.create({
     fontSize: widthPercentageToDP('7%'),
     fontWeight: 'bold',
     color: '#fff'
+  },
+  containerTitleCart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: widthPercentageToDP('6%'),
+  },
+  user: {
+    color: '#fff',
+    fontFamily: 'Roboto',
+    fontSize: widthPercentageToDP('4%'),
+    marginHorizontal: widthPercentageToDP('2%')
+  },
+  avatar: {
   }
 });

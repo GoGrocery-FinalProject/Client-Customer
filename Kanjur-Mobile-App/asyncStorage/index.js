@@ -22,3 +22,16 @@ export const getToken = async (navigation) => {
         console.log(e, '<<<<<<<< error getToken');
     }
 }
+
+export const getUsername = AsyncStorage.getItem('access_token')
+
+export const clearAsyncStorage = async (navigation) => {
+    try {
+        await AsyncStorage.clear()
+        alert('Anda berhasil Log Out akun')
+        navigation.replace('Home')
+    } catch (err) {
+        console.log(err, 'Error clear Async Storage');
+        alert('Log out akun gagal!')
+    }
+}
