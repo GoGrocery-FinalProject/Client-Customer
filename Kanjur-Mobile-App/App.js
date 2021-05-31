@@ -13,6 +13,7 @@ import CheckIn from './src/Screen/CheckIn';
 import ScanProduct from './src/Screen/ScanProduct';
 import History from './src/Screen/History';
 import HistoryDetail from './src/Screen/HistoryDetail';
+import CheckOut from './src/Screen/CheckOut';
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -30,6 +31,7 @@ export default function App() {
           <Stack.Screen name="ScanProduct" component={ScanProduct} options={{ headerStyle: {backgroundColor: '#0095DA'}}}/>
           <Stack.Screen name="Riwayat" component={History} options={{ headerStyle: {backgroundColor: '#FB5533'}}} />
           <Stack.Screen name="DetailRiwayat" component={HistoryDetail} options={{ headerStyle: {backgroundColor: '#0095DA'}}} />
+          <Stack.Screen name="CheckOut" component={CheckOut} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </ReduxProvider>

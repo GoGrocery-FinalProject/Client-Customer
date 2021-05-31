@@ -12,13 +12,13 @@ export default function Card() {
                 <Text style={styles.detail}>100 gr</Text>
             </View>
             <View style={styles.boxPrice}>
-                <Text style={styles.price}>Rp.50.000,-</Text>
+                <Text style={styles.price}>Rp.5.000,-</Text>
                 <View style={styles.buttonQty}>
                     <TouchableOpacity style={styles.plusminus}>
                         <Text style={styles.qtyText}>+</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.plusminus}>
-                        <Text style={styles.qtyText}>7</Text>
+                        <Text style={styles.qtyText}>1</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.plusminus}>
                         <Text style={styles.qtyText}>-</Text>
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontWeight: 'bold',
         fontSize: widthPercentageToDP('4.5%'),
-        color: '#FB5533'
+        color: '#FB5533',
+        textAlign: 'right'
     },
     title: {
         fontWeight: 'bold',

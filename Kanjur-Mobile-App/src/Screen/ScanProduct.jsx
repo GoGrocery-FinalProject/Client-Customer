@@ -15,6 +15,7 @@ export default function ScanProduct() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    //HIt ke server berdasar barcode
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 

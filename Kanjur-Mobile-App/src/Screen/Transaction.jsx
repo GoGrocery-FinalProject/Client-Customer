@@ -9,7 +9,7 @@ import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
 
 export default function Transaction({navigation}) {
-  const [total, setTotal] = useState(11000)
+  const [total, setTotal] = useState(30000)
   const username = getUsername._W
 
   return (

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-      width: widthPercentageToDP('60%'),
-      height: heightPercentageToDP('50%')
+      width: widthPercentageToDP('50%'),
+      height: heightPercentageToDP('10%')
   }
 });

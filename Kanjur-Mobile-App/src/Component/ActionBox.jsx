@@ -15,7 +15,7 @@ export default function ActionBox({navigation}) {
     }
 
     function payment() {
-        console.log('bayar');
+        navigation.navigate('CheckOut')
     }
 
     function history() {
