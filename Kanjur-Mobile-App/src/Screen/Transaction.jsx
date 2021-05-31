@@ -26,7 +26,7 @@ export default function Transaction({navigation}) {
           <Text style={styles.totalPrice}>Rp. {total},-</Text>
         </View>
       </View>
-      <ActionBox />
+      <ActionBox navigation={navigation}/>
       <ScrollView>
         <Slider />
         <View>
@@ -34,6 +34,9 @@ export default function Transaction({navigation}) {
             <Text style={styles.keranjang}>Keranjang Belanja</Text>
             <IconButton icon="delete" size={widthPercentageToDP('5%')} color="red" onPress={() => console.log('CLEAR CART')} />
           </View>
+          <Card />
+          <Card />
+          <Card />
           <Card />
           <Card />
           <Card />

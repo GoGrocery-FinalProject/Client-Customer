@@ -11,7 +11,7 @@ export default function ActionBox({navigation}) {
     const [shadowOpacity, setShadowOpacity] = useState(1);
     
     function ScanMethod() {
-        console.log('coba')
+        navigation.navigate('ScanProduct')
     }
 
     function payment() {
@@ -19,11 +19,11 @@ export default function ActionBox({navigation}) {
     }
 
     function history() {
-        console.log('riwayat');
+        navigation.navigate('Riwayat')
     }
 
     function checkout() {
-        console.log('checkout');
+        navigation.navigate('CheckIn')
     }
 
     return (

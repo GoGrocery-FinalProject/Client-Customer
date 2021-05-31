@@ -6,11 +6,12 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import { useSelector } from 'react-redux';
 
 export default function Home({navigation}) {
-    const carts = useSelector(state => state.cart)
+  const bannerHome = useSelector(state => state.bannerHome)
+  const carts = useSelector(state => state.cart)
  
   return (
       <View style={styles.container}>
-          <Image style={styles.image} source={{uri: 'https://www.static-src.com/siva/asset//05_2021/BPD27-GADGET-MOB.jpg'}} />
+          <Image style={styles.image} source={{uri: bannerHome}} />
           <View style={styles.textContainer}>
             <Text style={styles.title}>Selamat datang di Kantin Jujur</Text>
             <Text style={styles.text}>Kami menyediakan berbagai macam snack dan kebutuhan pokok, kami tidak menyediakan kasir. Disini kejujuran kalian diuji.</Text>

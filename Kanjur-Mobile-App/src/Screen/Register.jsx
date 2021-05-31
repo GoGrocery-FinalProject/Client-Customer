@@ -3,23 +3,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
+import { useSelector } from 'react-redux';
 
 export default function Register({navigation, route}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
+    const logo = useSelector(state => state.logo)
+
+    function register() {
+      console.log('register');
+      navigation.navigate('Home')
+    }
 
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.title}>Login</Text> */}
-            <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
+            <Image style={styles.logo} source={{ uri: logo}} />
             <TextInput 
-                style={styles.input} 
-                placeholder="No Telepon"
-                keyboardType='number-pad'
-                onChangeText={setPhone} 
-                value={phone}
-                
+              style={styles.input} 
+              placeholder="No Telepon"
+              keyboardType='number-pad'
+              onChangeText={setPhone} 
+              value={phone}  
             />
             <TextInput 
                 style={styles.input} 
@@ -36,7 +41,7 @@ export default function Register({navigation, route}) {
                 secureTextEntry
                 value={password}
             />
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => console.log('register')}>Register</Button>
+            <Button color="#fff" mode="flat" style={styles.button} onPress={() => register()}>Register</Button>
             <View style={styles.line} />
             <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('CheckIn')}>Masuk dengan Google</Button>
 

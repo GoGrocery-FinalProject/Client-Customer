@@ -3,8 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { getToken } from '../../asyncStorage';
+import { useSelector } from 'react-redux';
 
 export default function Splash({navigation}) {
+  const logo = useSelector(state => state.logo)
     useEffect(() => {
         setTimeout(() => {
             getToken(navigation)
@@ -12,7 +14,7 @@ export default function Splash({navigation}) {
     })
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={{uri: 'https://image.freepik.com/free-vector/click-collect-detailed-logo-sign_23-2148789056.jpg'}} />
+            <Image style={styles.logo} source={{uri: logo}} />
         <StatusBar style="auto" />
       </View>
   );

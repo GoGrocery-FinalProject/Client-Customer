@@ -6,6 +6,7 @@ const initialState = {
     cart: [{name: 'test', qty: 2}],
     loading: true,
     error: null,
+    bannerHome: 'https://www.static-src.com/siva/asset//05_2021/BPD27-GADGET-MOB.jpg',
     banner: [
         "https://static-siplah.blibli.com/static/img/banner-desktop.c6b8521.png",
         "https://assets-us-01.kc-usercontent.com/a7507759-f4f5-0038-8fff-c1db251108c1/845a7c24-311a-4267-88f9-a28f4009c1cc/Blibli-Diskon%20150.000_WEB%20BANNER.jpg",

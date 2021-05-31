@@ -4,15 +4,20 @@ import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
 import { setToken } from '../../asyncStorage';
+import { useSelector } from 'react-redux';
 
 export default function Login({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const logo = useSelector(state => state.logo)
 
+    function login() {
+      setToken(email)
+      navigation.navigate('CheckIn')
+    }
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.title}>Login</Text> */}
-            <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
+            <Image style={styles.logo} source={{ uri: logo}} />
             <TextInput 
                 style={styles.input} 
                 placeholder="Email / No Telepon"
@@ -27,11 +32,11 @@ export default function Login({navigation}) {
                 secureTextEntry
                 value={password}
             />
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => setToken(email)}>Login</Button>
+            <Button color="#fff" mode="flat" style={styles.button} onPress={() => login()}>Login</Button>
             <View style={styles.line} />
             <Text style={styles.text}>Tidak memiliki akun ?</Text>
             <Button color="#fff" mode="flat" style={styles.button} onPress={() => navigation.navigate('Register')}>Register Disini</Button>
-            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => console.log('google login')}>Login dengan Google</Button>
+            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('Transaction')}>Login dengan Google</Button>
 
         <StatusBar style="auto" />
       </View>
