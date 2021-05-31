@@ -4,42 +4,43 @@ import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
 import { setToken } from '../../asyncStorage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postLogin } from '../../store/actions';
 
 export default function Login({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const logo = useSelector(state => state.logo)
+    const dispatch = useDispatch()
 
     function login() {
-      setToken(email)
+      // setToken(email)
+      dispatch(postLogin({email, password}))
       navigation.navigate('CheckIn')
     }
     return (
-        <View style={styles.container}>
-            <Image style={styles.logo} source={{ uri: logo}} />
-            <TextInput 
-                style={styles.input} 
-                placeholder="Email / No Telepon"
-                onChangeText={setEmail} 
-                value={email}
-                
-            />
-            <TextInput 
-                style={styles.input} 
-                placeholder="Password"
-                onChangeText={setPassword} 
-                secureTextEntry
-                value={password}
-            />
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => login()}>Login</Button>
-            <View style={styles.line} />
-            <Text style={styles.text}>Tidak memiliki akun ?</Text>
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => navigation.navigate('Register')}>Register Disini</Button>
-            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('Transaction')}>Login dengan Google</Button>
-
-        <StatusBar style="auto" />
-      </View>
+      <View style={styles.container}>
+        <Image style={styles.logo} source={{ uri: logo}} />
+        <TextInput 
+          style={styles.input} 
+          placeholder="Email / No Telepon"
+          onChangeText={setEmail} 
+          value={email} 
+        />
+        <TextInput 
+          style={styles.input} 
+          placeholder="Password"
+          onChangeText={setPassword} 
+          secureTextEntry
+          value={password}
+        />
+        <Button color="#fff" mode="flat" style={styles.button} onPress={() => login()}>Login</Button>
+        <View style={styles.line} />
+        <Text style={styles.text}>Tidak memiliki akun ?</Text>
+        <Button color="#fff" mode="flat" style={styles.button} onPress={() => navigation.navigate('Register')}>Register Disini</Button>
+        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('Transaction')}>Login dengan Google</Button>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

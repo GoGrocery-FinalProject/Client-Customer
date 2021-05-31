@@ -1,11 +1,12 @@
 import { applyMiddleware, createStore } from "redux"
-import thunk from 'react-redux'
-import { SET_CART, SET_LOADING, SET_ERROR } from './constants'
+import thunk from 'redux-thunk'
+import { SET_CART, SET_LOADING, SET_ERROR, SET_USER } from './constants'
 
 const initialState = {
     cart: [{name: 'test', qty: 2}],
     loading: true,
     error: null,
+    user: {},
     bannerHome: 'https://www.static-src.com/siva/asset//05_2021/BPD27-GADGET-MOB.jpg',
     banner: [
         "https://static-siplah.blibli.com/static/img/banner-desktop.c6b8521.png",
@@ -25,9 +26,11 @@ function reducer (state = initialState, action) {
             return {...state, loading : payload}
         case SET_ERROR:
             return {...state, error : payload}
+        case SET_USER:
+            return {...state, user : payload}
         default:
             return state
     }
 }
 
-export const store = createStore(reducer)
+export const store = createStore(reducer, applyMiddleware(thunk))

@@ -4,8 +4,17 @@ export const setToken = async (token) => {
     try {
         await AsyncStorage.setItem('access_token', token) 
         console.log(token, 'di asyncc');   
-    } catch (e) {
-        console.log(e, '<<<<<<error async storage');
+    } catch (err) {
+        console.log(err, '<<<<<<error async storage');
+    }
+}
+
+export const setName = async (name) => {
+    try {
+        await AsyncStorage.setItem('name', name) 
+        console.log(name, 'di asyncc');   
+    } catch (err) {
+        console.log(err, '<<<<<<error async storage name');
     }
 }
 
@@ -23,7 +32,7 @@ export const getToken = async (navigation) => {
     }
 }
 
-export const getUsername = AsyncStorage.getItem('access_token')
+export const getUsername = AsyncStorage.getItem('name')
 
 export const clearAsyncStorage = async (navigation) => {
     try {

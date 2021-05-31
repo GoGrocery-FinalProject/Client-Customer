@@ -3,50 +3,58 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {postRegister} from '../../store/actions'
 
 export default function Register({navigation, route}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [phone, setPhone] = useState('')
-    const logo = useSelector(state => state.logo)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState('')
+  const [name, setName] = useState('')
+  const logo = useSelector(state => state.logo)
+  const dispatch = useDispatch()
 
-    function register() {
-      console.log('register');
-      navigation.navigate('Home')
-    }
+  function register(data) {
+    dispatch(postRegister(data))
+    // console.log(data, 'data');
+    navigation.navigate('Home')
+  }
 
-    return (
-        <View style={styles.container}>
-            <Image style={styles.logo} source={{ uri: logo}} />
-            <TextInput 
-              style={styles.input} 
-              placeholder="No Telepon"
-              keyboardType='number-pad'
-              onChangeText={setPhone} 
-              value={phone}  
-            />
-            <TextInput 
-                style={styles.input} 
-                placeholder="Email"
-                keyboardType='email-address'
-                onChangeText={setEmail} 
-                value={email}
-                
-            />
-            <TextInput 
-                style={styles.input} 
-                placeholder="Password"
-                onChangeText={setPassword} 
-                secureTextEntry
-                value={password}
-            />
-            <Button color="#fff" mode="flat" style={styles.button} onPress={() => register()}>Register</Button>
-            <View style={styles.line} />
-            <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('CheckIn')}>Masuk dengan Google</Button>
-
-        <StatusBar style="auto" />
-      </View>
+  return (
+      <View style={styles.container}>
+        <Image style={styles.logo} source={{ uri: logo}} />
+        <TextInput 
+            style={styles.input} 
+            placeholder="Nama"
+            onChangeText={setName} 
+            value={name} 
+        />
+        <TextInput 
+          style={styles.input} 
+          placeholder="No Telepon"
+          keyboardType='number-pad'
+          onChangeText={setPhone} 
+          value={phone}  
+        />
+        <TextInput 
+            style={styles.input} 
+            placeholder="Email"
+            keyboardType='email-address'
+            onChangeText={setEmail} 
+            value={email} 
+        />
+        <TextInput 
+            style={styles.input} 
+            placeholder="Password"
+            onChangeText={setPassword} 
+            secureTextEntry
+            value={password}
+        />
+        <Button color="#fff" mode="flat" style={styles.button} onPress={() => register({name, email, phone_number: phone, password})}>Register</Button>
+        <View style={styles.line} />
+        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('CheckIn')}>Masuk dengan Google</Button>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

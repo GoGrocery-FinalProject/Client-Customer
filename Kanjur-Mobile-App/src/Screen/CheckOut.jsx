@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
+import { Button } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
 export default function CheckOut({navigation}) {
@@ -7,7 +8,11 @@ export default function CheckOut({navigation}) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
-      <Text style={styles.title}>Ini Halaman setelah bayar, diisi apaan yak. mikir dulu</Text>
+      <Text style={styles.title}>Terima Kasih sudah berbelanja di Kanjur :)</Text>
+      <Text style={styles.text}>Anda telah berbelanja sebanyak :</Text>
+      <Text style={styles.price}>Rp. 30.000,-</Text>
+      <Button style={styles.button} color='#fff' onPress={() => console.log('detail belanjaan')}>Lihat Detail belanja</Button>
+      <Button style={styles.button} color='#fff' onPress={() => navigation.replace('CheckIn')}>Belanja Lagi Yuk</Button>
     </View>
   );
 }
@@ -48,18 +53,25 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: 'Roboto',
     fontSize: widthPercentageToDP('6%'),
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginHorizontal: widthPercentageToDP('10%'),
+    marginVertical: heightPercentageToDP('5%')
   },
-  subTitle: {
+  price: {
     color: "#fff",
     fontFamily: 'Roboto',
-    fontSize: widthPercentageToDP('4.5%')
+    fontSize: widthPercentageToDP('10%'),
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginHorizontal: widthPercentageToDP('10%'),
+    marginBottom: heightPercentageToDP('5%'),
   },
   text: {
     fontFamily: 'Roboto',
     color: '#fff',
-    fontSize: widthPercentageToDP('3%'),
-    textAlign: 'center'
+    fontSize: widthPercentageToDP('3.5%'),
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#FB5533',
@@ -67,6 +79,6 @@ const styles = StyleSheet.create({
     width: widthPercentageToDP('60%'),
     borderRadius: 5,
     justifyContent: 'center',
-    marginVertical: heightPercentageToDP('1.5%'),
+    marginTop: heightPercentageToDP('2%'),
   }
 });
