@@ -3,26 +3,22 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { IconButton } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 
-export default function CardTransaktion() {
-    const transactionID = 'ABCDEF12345'
-    const transactionDate = '30 Mei 2021'
-    const paymentStatus = 'Dibayar'
-    const totalProduct = 10
-    const total = 75000
+export default function CardTransaction({navigation, transaction}) {
 
     function detailTransaksi() {
-        console.log('ke screen detail');
+        console.log('ke screen detail')
+        navigation.navigate('DetailRiwayat', {data: transaction})
     }
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => detailTransaksi}>
+        <TouchableOpacity style={styles.container} onPress={() => detailTransaksi()}>
             <View style={styles.header}>
-                <Text style={styles.price}>Transaksi: {transactionID}</Text>
-                <Text style={styles.price}>{paymentStatus}</Text>
+                <Text style={styles.price}>Transaksi: {transaction.transactionID}</Text>
+                <Text style={styles.price}>{transaction.paymentStatus}</Text>
             </View>
             <View style={styles.body}>
-                <Text style={styles.detail}>Tanggal Transaksi: {transactionDate}</Text>
-                <Text style={styles.detail}>Total Produk: {totalProduct} pcs</Text>
+                <Text style={styles.detail}>Tanggal Transaksi: {transaction.transactionDate}</Text>
+                <Text style={styles.detail}>Total Produk: {transaction.totalProduct} pcs</Text>
             </View>
             <View style={styles.totalContainer}>
                 <IconButton
@@ -31,7 +27,7 @@ export default function CardTransaktion() {
                     color='#FB5533'
                     size={24}
                 />
-                <Text style={styles.price}>Total Pembayaran: Rp. {total},-</Text>
+                <Text style={styles.price}>Total Pembayaran: Rp. {transaction.total},-</Text>
             </View>
         </TouchableOpacity>
     )
