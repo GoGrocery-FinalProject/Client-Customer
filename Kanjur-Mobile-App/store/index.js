@@ -3,7 +3,32 @@ import thunk from 'redux-thunk'
 import { SET_CART, SET_LOADING, SET_ERROR, SET_USER } from './constants'
 
 const initialState = {
-    cart: [{name: 'test', qty: 2}],
+    cart: [{
+        "id": 1,
+        "name": "Taro Snack Net Seaweed Pck 70G",
+        "image_url": "https://assets.klikindomaret.com/share/20055205/20055205_1.jpg",
+        "description": "Rasa Seaweed ukuran 70 Gram",
+        "barcode_number": "1414100003",
+        "stock": 18,
+        "price": 9500,
+        "stockBefore": 5,
+        "createdAt": "2021-05-30T04:16:35.484Z",
+        "updatedAt": "2021-05-30T09:20:01.831Z",
+        "qty" : 1
+    },
+    {
+        "id": 2,
+        "name": "Taro Snack Net Seaweed Pck 70G",
+        "image_url": "https://assets.klikindomaret.com/share/20055205/20055205_1.jpg",
+        "description": "Rasa Seaweed ukuran 70 Gram",
+        "barcode_number": "1414100003",
+        "stock": 18,
+        "price": 5000,
+        "stockBefore": 5,
+        "createdAt": "2021-05-30T04:16:35.484Z",
+        "updatedAt": "2021-05-30T09:20:01.831Z",
+        "qty" : 2
+    }],
     loading: true,
     error: null,
     user: {},

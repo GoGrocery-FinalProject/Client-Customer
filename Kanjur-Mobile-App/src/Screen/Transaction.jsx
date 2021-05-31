@@ -7,10 +7,21 @@ import ActionBox from '../Component/ActionBox';
 import StatusBarLight from '../Component/StatusBarLight'
 import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
+import { useSelector } from 'react-redux';
+import convertRp from '../../helpers/convertRp';
 
 export default function Transaction({navigation}) {
-  const [total, setTotal] = useState(30000)
+  const [total, setTotal] = useState(0)
   const username = getUsername._W
+  const carts = useSelector(state => state.cart)
+
+  useEffect(() => {
+    let subTotal = 0
+    for (let i = 0; i < carts.length; i++) {
+      subTotal += (carts[i].price * carts[i].qty)
+    }
+    setTotal(subTotal)
+  })
 
   return (
     <>
@@ -23,7 +34,7 @@ export default function Transaction({navigation}) {
         </View>
         <View style={styles.totalContainer}>
           <Text style={styles.total}>Total belanja:</Text>
-          <Text style={styles.totalPrice}>Rp. {total},-</Text>
+          <Text style={styles.totalPrice}>{convertRp(total)}</Text>
         </View>
       </View>
       <ActionBox navigation={navigation}/>
@@ -34,12 +45,11 @@ export default function Transaction({navigation}) {
             <Text style={styles.keranjang}>Keranjang Belanja</Text>
             <IconButton icon="delete" size={widthPercentageToDP('5%')} color="red" onPress={() => console.log('CLEAR CART')} />
           </View>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {
+            carts.map((el, idx) => {
+              return <Card key={el.id} data={el} idx={idx}/>
+            })
+          }
         </View>
       </ScrollView>
       <StatusBarLight />
@@ -86,7 +96,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   totalPrice: {
-    width: widthPercentageToDP('42.5%'),
+    // width: widthPercentageToDP('42.5%'),
     textAlign: 'right',
     fontFamily: 'Roboto',
     fontSize: widthPercentageToDP('7%'),
