@@ -75,7 +75,7 @@ export const clearAsyncStorage = async (navigation) => {
 export const removeBarcode = async () => {
     try {
         await AsyncStorage.removeItem('barcode')
-        alert('Berhasil keluar Toko')
+        // alert('Berhasil keluar Toko')
     } catch (err) {
         console.log(err, 'Error remove barcode Async Storage');
         alert('Gagal keluar Toko')
