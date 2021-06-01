@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, LogBox } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
-import { setToken } from '../../asyncStorage';
 import { useDispatch, useSelector } from 'react-redux';
-import { postLogin } from '../../store/actions';
+import { googleLogin, postLogin } from '../../store/actions';
+
+import * as firebase from 'firebase'
+import * as Google from 'expo-google-app-auth';
+import { firebaseConfig } from '../../config/config'
+
+LogBox.ignoreLogs(['Deprecated: Native Google Sign-In has been moved to Expo.GoogleSignIn (\'expo-google-sign-in\') Falling back to `web` behavior. `behavior` deprecated in SDK 34'])
 
 export default function Login({navigation}) {
     const [email, setEmail] = useState('')
@@ -13,10 +18,37 @@ export default function Login({navigation}) {
     const logo = useSelector(state => state.logo)
     const dispatch = useDispatch()
 
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    } else {
+        firebase.app()
+    }
+
+    async function signInWithGoogleAsync() {
+      try {
+        const result = await Google.logInAsync({
+          behavior: "web",
+          androidClientId: "83160479476-t0ajeas3b2p403a7o4h5u1ver42cj06q.apps.googleusercontent.com",
+          iosClientId: "83160479476-75021rn5andmc1atknqvdm81064omqkj.apps.googleusercontent.com",
+          scopes: ['profile', 'email'],
+        });
+        if (result.type === 'success') {
+          const name = result.user.name
+          const email = result.user.email
+          dispatch(googleLogin(navigation, name, email))
+          return result.accessToken;
+        } else {
+          return { cancelled: true };
+        }
+      } catch (e) {
+        return { error: true };
+      }
+    }
+
     function login() {
-      // setToken(email)
       dispatch(postLogin({email, password}, navigation))
     }
+
     return (
       <View style={styles.container}>
         <Image style={styles.logo} source={{ uri: logo}} />
@@ -37,7 +69,7 @@ export default function Login({navigation}) {
         <View style={styles.line} />
         <Text style={styles.text}>Tidak memiliki akun ?</Text>
         <Button color="#fff" mode="flat" style={styles.button} onPress={() => navigation.navigate('Register')}>Register Disini</Button>
-        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('Transaction')}>Login dengan Google</Button>
+        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => signInWithGoogleAsync()}>Login dengan Google</Button>
       <StatusBar style="auto" />
     </View>
   );

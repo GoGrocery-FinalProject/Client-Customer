@@ -171,3 +171,32 @@ export function getTransaction() {
     }
 }
 
+export function googleLogin(navigation, name, email) {
+    return function (dispatch) {
+        dispatch(setLoading(true))
+        axios({
+            method: 'POST',
+            url: baseURL + 'glogin',
+            data: {
+                email,
+                name
+            }
+        })
+        .then(data => {
+            console.log(data.data, 'ini balikan google login');
+            setToken(data.data.token)
+            setName(data.data.name)
+            setUserId(data.data.userId.toString())
+            alert('Login berhasil')
+            navigation.navigate('CheckIn')
+        })
+        .catch(err => {
+            console.log(err, 'error login google');
+            alert(`Gagal Login dengan Google`);
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+    }
+}
+

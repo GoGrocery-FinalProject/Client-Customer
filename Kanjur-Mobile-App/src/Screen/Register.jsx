@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { StyleSheet, LogBox, View, Image, TextInput } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import {postRegister} from '../../store/actions'
+import {googleLogin, postRegister} from '../../store/actions'
+
+import * as firebase from 'firebase'
+import * as Google from 'expo-google-app-auth';
+import { firebaseConfig } from '../../config/config'
+
+LogBox.ignoreLogs(['Deprecated: Native Google Sign-In has been moved to Expo.GoogleSignIn (\'expo-google-sign-in\') Falling back to `web` behavior. `behavior` deprecated in SDK 34'])
 
 export default function Register({navigation, route}) {
   const [email, setEmail] = useState('')
@@ -13,6 +19,33 @@ export default function Register({navigation, route}) {
   const [name, setName] = useState('')
   const logo = useSelector(state => state.logo)
   const dispatch = useDispatch()
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  } else {
+      firebase.app()
+  }
+
+  async function signInWithGoogleAsync() {
+    try {
+      const result = await Google.logInAsync({
+        behavior: "web",
+        androidClientId: "83160479476-t0ajeas3b2p403a7o4h5u1ver42cj06q.apps.googleusercontent.com",
+        iosClientId: "83160479476-75021rn5andmc1atknqvdm81064omqkj.apps.googleusercontent.com",
+        scopes: ['profile', 'email'],
+      });
+      if (result.type === 'success') {
+        const name = result.user.name
+        const email = result.user.email
+        dispatch(googleLogin(navigation, name, email))
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  }
 
   function register(data) {
     dispatch(postRegister(data))
@@ -52,7 +85,7 @@ export default function Register({navigation, route}) {
         />
         <Button color="#fff" mode="flat" style={styles.button} onPress={() => register({name, email, phone_number: phone, password})}>Register</Button>
         <View style={styles.line} />
-        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => navigation.navigate('CheckIn')}>Masuk dengan Google</Button>
+        <Button color="#fff" icon="google" mode="flat" style={styles.buttonGoogle} onPress={() => signInWithGoogleAsync()}>Masuk dengan Google</Button>
       <StatusBar style="auto" />
     </View>
   );
