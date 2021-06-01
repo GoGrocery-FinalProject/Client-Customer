@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getToken, getUserId, getUsername, setName, setToken, setUserId } from '../asyncStorage';
-import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION } from './constants'
+import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION, DELETE_CART_BYINDEX } from './constants'
 
 const baseURL ='https://kanjur-test.herokuapp.com/'
 
@@ -10,6 +10,10 @@ export function setCart(payload) {
 
 export function deleteCart(payload) {
     return ({type: DELETE_CART, payload})
+}
+
+export function deleteCartByIndex(payload) {
+    return ({type: DELETE_CART_BYINDEX, payload})
 }
 
 export function setLoading(payload) {

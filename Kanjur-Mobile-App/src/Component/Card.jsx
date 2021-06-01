@@ -2,31 +2,45 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Avatar, Button, TextInput } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
+import { useDispatch } from 'react-redux'
 import convertRp from '../../helpers/convertRp'
+import { deleteCartByIndex } from '../../store/actions'
 
 export default function Card({data, idx}) {
     const [qty, setQty] = useState(data.quantity)
-    // console.log(data.qty, ';;;;;;;');
+    const dispatch = useDispatch()
 
     function plus() {
-        // console.log(data.qty);
-        // console.log(idx, 'ini index');
         data.quantity++
-        console.log(data.quantity, 'after add');
-        setQty(data.quantity)
+        if (data.quantity === 0) {
+            console.log('ganti');
+            dispatch(deleteCartByIndex(idx))
+        } else {
+            console.log(data.quantity, 'after add');
+            setQty(data.quantity)
+        } 
     }
 
     function minus() {
-        // console.log(data.qty);
-        // console.log(idx, 'ini index');
         data.quantity--
-        console.log(data.quantity, 'after min');
-        setQty(data.quantity)
+        if (data.quantity === 0) {
+            console.log('ganti');
+            dispatch(deleteCartByIndex(idx))
+        } else {
+            console.log(data.quantity, 'after min');
+            setQty(data.quantity)
+        } 
     }
 
     function onChangeQty(value) {
-        data.quantity = value
-        setQty(value)
+        console.log(value ,'/////////', idx);
+        if (+value === 0) {
+            console.log('ganti');
+            dispatch(deleteCartByIndex(idx))
+        } else {
+            data.quantity = value
+            setQty(value)
+        }
     }
 
     return (
@@ -45,6 +59,7 @@ export default function Card({data, idx}) {
                     <TextInput
                         width={widthPercentageToDP('10%')}
                         dense={true}
+                        keyboardType='number-pad'
                         paddingVertical={0}
                         mode='outlined'
                         style={styles.formInput}

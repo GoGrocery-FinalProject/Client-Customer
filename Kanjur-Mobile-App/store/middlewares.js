@@ -1,4 +1,4 @@
-import { SET_CART, SET_TOTAL } from "./constants"
+import { DELETE_CART_BYINDEX, SET_CART, SET_TOTAL } from "./constants"
 
 
 export function middlewares (store) {
@@ -9,12 +9,11 @@ export function middlewares (store) {
                 carts.push(action.payload)
                 console.log(carts, '<<<<<<<<<<<setelah push');
                 next({...action, payload: carts})
-            // } else if (action.type === SET_TOTAL) {
-            //     let subTotal = 0
-            //     for (let i = 0; i < carts.length; i++) {
-            //         subTotal += (carts[i].price * carts[i].quantity)
-            //     }
-            //     next({...action, payload: subTotal})
+            } else if (action.type === DELETE_CART_BYINDEX) {
+                let index = action.payload
+                let newCarts = carts.filter((el,idx) => idx !== index )
+                console.log(newCarts, 'setelah dikurangi >>>>>>>>>.');
+                next({...action, payload: newCarts})
             } else {
                 next(action)
             }
