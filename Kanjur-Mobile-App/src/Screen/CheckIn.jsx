@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { setBarcode } from '../../asyncStorage';
 
 export default function CheckIn({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -19,6 +20,7 @@ export default function CheckIn({navigation}) {
     setScanned(true);
     console.log(data, '======datanya');
     if (data === 'https://me-qr.com/549273') {
+      setBarcode(data)
       navigation.navigate('Transaction')
       console.log('masuk');
     } else {

@@ -2,16 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { useSelector } from 'react-redux';
+import convertRp from '../../helpers/convertRp';
 
-export default function CheckOut({navigation}) {
+export default function CheckOut({navigation, route}) {
+  const total = useSelector(state => state.total)
+  const {link, order_id} = route.params
+
+  function detailBelanja() {
+    console.log('detailnya');
+  }
 
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
       <Text style={styles.title}>Terima Kasih sudah berbelanja di Kanjur :)</Text>
       <Text style={styles.text}>Anda telah berbelanja sebanyak :</Text>
-      <Text style={styles.price}>Rp. 30.000,-</Text>
-      <Button style={styles.button} color='#fff' onPress={() => console.log('detail belanjaan')}>Lihat Detail belanja</Button>
+      <Text style={styles.price}>{convertRp(total)}</Text>
+      <Button style={styles.button} color='#fff' onPress={() => detailBelanja()}>Lihat Detail belanja</Button>
+      <Button style={styles.button} color='#fff' onPress={() => navigation.navigate('Midtrans', {link: link, order_id: order_id})}>Kemenu pembayaran</Button>
       <Button style={styles.button} color='#fff' onPress={() => navigation.replace('CheckIn')}>Belanja Lagi Yuk</Button>
     </View>
   );

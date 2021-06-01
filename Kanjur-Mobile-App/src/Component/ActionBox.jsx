@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeBarcode } from '../../asyncStorage';
 import { deleteCart, getTransaction, paymentMidtrans } from '../../store/actions';
 import ButtonView from '../Component/Button'
 
@@ -21,6 +22,7 @@ export default function ActionBox({navigation}) {
 
     function payment() {
         console.log('bayar');
+        removeBarcode()
         dispatch(paymentMidtrans(carts, total, navigation))
     }
 
@@ -32,6 +34,7 @@ export default function ActionBox({navigation}) {
 
     function checkout() {
         dispatch(deleteCart())
+        removeBarcode()
         navigation.navigate('CheckIn')
     }
 

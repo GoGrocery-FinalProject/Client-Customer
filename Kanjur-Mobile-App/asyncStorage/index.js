@@ -18,6 +18,15 @@ export const setName = async (name) => {
     }
 }
 
+export const setBarcode = async (barcode) => {
+    try {
+        await AsyncStorage.setItem('barcode', barcode) 
+        console.log(barcode, 'barcode di asyncc');   
+    } catch (err) {
+        console.log(err, '<<<<<<error async storage barcode');
+    }
+}
+
 export const setUserId = async (userId) => {
     try {
         await AsyncStorage.setItem('userId', userId)
@@ -27,23 +36,30 @@ export const setUserId = async (userId) => {
     }
 }
 
+export const getToken = AsyncStorage.getItem('access_token')
+export const getUsername = AsyncStorage.getItem('name')
+export const getUserId = AsyncStorage.getItem('userId')
+export const getBarcode = AsyncStorage.getItem('barcode')
+
 export const checkToken = async (navigation) => {
     try {
         const token = await AsyncStorage.getItem('access_token')
         if(token === null) {
             navigation.replace('Home')
         } else {
-            navigation.replace('CheckIn')
+            if(getBarcode._W) {
+                navigation.replace('Transaction')
+                console.log('BARCODE ADA');
+            } else {
+                navigation.replace('CheckIn')
+                console.log('barcode ga ada');
+            }
         }
         return token
     } catch (e) {
         console.log(e, '<<<<<<<< error getToken');
     }
 }
-
-export const getToken = AsyncStorage.getItem('access_token')
-export const getUsername = AsyncStorage.getItem('name')
-export const getUserId = AsyncStorage.getItem('userId')
 
 export const clearAsyncStorage = async (navigation) => {
     try {
@@ -53,5 +69,15 @@ export const clearAsyncStorage = async (navigation) => {
     } catch (err) {
         console.log(err, 'Error clear Async Storage');
         alert('Log out akun gagal!')
+    }
+}
+
+export const removeBarcode = async () => {
+    try {
+        await AsyncStorage.removeItem('barcode')
+        alert('Berhasil keluar Toko')
+    } catch (err) {
+        console.log(err, 'Error remove barcode Async Storage');
+        alert('Gagal keluar Toko')
     }
 }

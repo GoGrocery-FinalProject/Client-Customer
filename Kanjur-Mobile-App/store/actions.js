@@ -95,6 +95,8 @@ export function getProductByBarcode(barcode) {
             let product = {
                 id: data.data.id,
                 name: data.data.name,
+                image_url: data.data.image_url,
+                description: data.data.description,
                 price: data.data.price,
                 quantity: 1
             }
@@ -118,14 +120,12 @@ export function paymentMidtrans(carts, total, navigation) {
         gross_amount: total,
         item_details: carts
     }
+    console.log(data, 'data ke midtransssssssss');
     return function (dispatch) {
         dispatch(setLoading(true))
         axios({
             method: 'POST',
             url: baseURL + 'pay',
-            // headers: {
-            //     token: getToken._W
-            // },
             data: data
         })
         .then(response => {
@@ -169,3 +169,4 @@ export function getTransaction() {
         })
     }
 }
+
