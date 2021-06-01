@@ -100,6 +100,7 @@ export function getProductByBarcode(barcode) {
                 id: data.data.id,
                 name: data.data.name,
                 image_url: data.data.image_url,
+                barcode_number: data.data.barcode_number,
                 description: data.data.description,
                 price: data.data.price,
                 quantity: 1

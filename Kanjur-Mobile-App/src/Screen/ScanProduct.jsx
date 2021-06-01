@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProductByBarcode } from '../../store/actions';
 
 export default function ScanProduct({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const dispatch = useDispatch()
+  const carts = useSelector(state => state.cart)
 
   useEffect(() => {
     (async () => {
@@ -18,8 +19,16 @@ export default function ScanProduct({navigation}) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    //HIt ke server berdasar barcode
-    dispatch(getProductByBarcode(data))
+    let flag = true
+    for (let i = 0; i < carts.length; i++) {
+      if (carts[i].barcode_number === data) {
+        carts[i].quantity++
+        flag = false
+      }
+    }
+    if (flag) {
+      dispatch(getProductByBarcode(data))
+    }
     navigation.navigate('Transaction')
   };
 
