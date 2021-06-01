@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { IconButton } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
+import convertRp from '../../helpers/convertRp'
 
 export default function CardTransaction({navigation, transaction}) {
 
@@ -10,15 +11,25 @@ export default function CardTransaction({navigation, transaction}) {
         navigation.navigate('DetailRiwayat', {data: transaction})
     }
 
+    function countQty() {
+        const products = JSON.parse(transaction.products)
+        let totalQty = 0
+        for (let i = 0; i< products.length; i++) {
+            totalQty += products[i].quantity
+        }
+        return totalQty
+    }
+
     return (
         <TouchableOpacity style={styles.container} onPress={() => detailTransaksi()}>
             <View style={styles.header}>
-                <Text style={styles.price}>Transaksi: {transaction.transactionID}</Text>
-                <Text style={styles.price}>{transaction.paymentStatus}</Text>
+                <Text style={styles.price}>{transaction.order_id}</Text>
+                <Text style={styles.price}>payment status</Text>
             </View>
             <View style={styles.body}>
-                <Text style={styles.detail}>Tanggal Transaksi: {transaction.transactionDate}</Text>
-                <Text style={styles.detail}>Total Produk: {transaction.totalProduct} pcs</Text>
+                <Text style={styles.detail}>Tanggal Transaksi: {transaction.createdAt.split('T')[0]}</Text>
+                <Text style={styles.detail}>Waktu Transaksi: {transaction.createdAt.split('T')[1].split('.')[0]}</Text>
+                <Text style={styles.detail}>Total Produk: {countQty()} pcs</Text>
             </View>
             <View style={styles.totalContainer}>
                 <IconButton
@@ -27,7 +38,7 @@ export default function CardTransaction({navigation, transaction}) {
                     color='#FB5533'
                     size={24}
                 />
-                <Text style={styles.price}>Total Pembayaran: Rp. {transaction.total},-</Text>
+                <Text style={styles.price}>Total Pembayaran: {convertRp(transaction.totalPrice)}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -41,8 +52,7 @@ const styles = StyleSheet.create({
         marginHorizontal: widthPercentageToDP('2%'),
         borderWidth: 2,
         borderColor: '#FFF',
-        borderRadius: 8
-        
+        borderRadius: 8,       
     },
     header: {
         paddingHorizontal: widthPercentageToDP('5%'),
@@ -52,7 +62,7 @@ const styles = StyleSheet.create({
     },
     body: {
         paddingHorizontal: widthPercentageToDP('5%'),
-        paddingVertical: heightPercentageToDP('2%'),
+        paddingVertical: heightPercentageToDP('1%'),
         flexDirection: 'column',
         backgroundColor: '#f4f4f4'
     },
@@ -71,9 +81,9 @@ const styles = StyleSheet.create({
     },
     detail: {
         color: 'black',
-        fontSize: widthPercentageToDP('4%'),
+        fontSize: widthPercentageToDP('3%'),
         fontFamily: 'Roboto',
-        paddingTop: heightPercentageToDP('1%')
+        // paddingTop: heightPercentageToDP('1%')
     },
     avatar: {
         marginHorizontal: widthPercentageToDP('2%'),

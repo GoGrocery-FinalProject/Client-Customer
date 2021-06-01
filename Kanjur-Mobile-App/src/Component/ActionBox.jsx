@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { useDispatch } from 'react-redux';
-import { deleteCart } from '../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCart, getTransaction, paymentMidtrans } from '../../store/actions';
 import ButtonView from '../Component/Button'
 
 export default function ActionBox({navigation}) {
@@ -11,6 +11,8 @@ export default function ActionBox({navigation}) {
     const [shadowOffsetHeight, setShadowOffsetHeight] = useState(6);
     const [shadowRadius, setShadowRadius] = useState(25);
     const [shadowOpacity, setShadowOpacity] = useState(1);
+    const total = useSelector(state => state.total)
+    const carts = useSelector(state => state.cart)
     const dispatch = useDispatch()
     
     function ScanMethod() {
@@ -18,10 +20,13 @@ export default function ActionBox({navigation}) {
     }
 
     function payment() {
-        navigation.navigate('CheckOut')
+        console.log('bayar');
+        dispatch(paymentMidtrans(carts, total, navigation))
     }
 
     function history() {
+        console.log('history');
+        dispatch(getTransaction())
         navigation.navigate('Riwayat')
     }
 

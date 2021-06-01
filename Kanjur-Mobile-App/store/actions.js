@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { getToken, setName, setToken } from '../asyncStorage';
-import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART } from './constants'
+import { getToken, getUserId, getUsername, setName, setToken, setUserId } from '../asyncStorage';
+import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION } from './constants'
 
 const baseURL ='https://kanjur-test.herokuapp.com/'
 
@@ -22,6 +22,14 @@ export function setError(payload) {
 
 export function setUser(payload) {
     return ({type: SET_USER, payload})
+}
+
+export function setTotal(payload) {
+    return ({type: SET_TOTAL, payload})
+}
+
+export function setTransaction(payload) {
+    return ({type: SET_TRANSACTION, payload})
 }
 
 export function postRegister(data) {
@@ -59,6 +67,7 @@ export function postLogin(data, navigation) {
         .then(data => {
             setToken(data.data.token)
             setName(data.data.name)
+            setUserId(data.data.userId.toString())
             alert('Login berhasil')
             navigation.navigate('CheckIn')
         })
@@ -83,14 +92,77 @@ export function getProductByBarcode(barcode) {
             } 
         })
         .then(data => {
-            data.data.qty = 1
+            let product = {
+                id: data.data.id,
+                name: data.data.name,
+                price: data.data.price,
+                quantity: 1
+            }
             console.log(data.data, '<<<<<<<<<<<<berhasil hit')
-            dispatch(setCart(data.data))
+            dispatch(setCart(product))
             alert(`Produk berhasil ditambahkan ke keranjang`);
         })
         .catch(err => {
             console.log(err, 'error get product by barcode');
             alert(`Gagal tambahkan product`);
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+    }
+}
+
+export function paymentMidtrans(carts, total, navigation) {
+    let data = {
+        userId: getUserId._W,
+        gross_amount: total,
+        item_details: carts
+    }
+    return function (dispatch) {
+        dispatch(setLoading(true))
+        axios({
+            method: 'POST',
+            url: baseURL + 'pay',
+            // headers: {
+            //     token: getToken._W
+            // },
+            data: data
+        })
+        .then(response => {
+            console.log(response.data.order_id, 'response order_id payment');
+            console.log(response.data.link, ';;;;;;;;;;;;;;;;');
+            navigation.navigate('Midtrans', {link: response.data.link})
+            alert(`Berhasil masuk ke menu pembayaran`);
+        })
+        .catch(err => {
+            console.log(err, 'error payment midtrans');
+            alert(`Gagal melakukan pembayaran`);
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+    }
+}
+
+export function getTransaction() {
+    let userId = getUserId._W
+    return function (dispatch) {
+        dispatch(setLoading(true))
+        axios({
+            method: 'GET',
+            url: baseURL + 'transactions/' + userId,
+            headers: {
+                token: getToken._W
+            } 
+        })
+        .then(data => {
+            console.log(data.data.transactions, 'ini balikan transaction');
+            dispatch(setTransaction(data.data.transactions))
+            alert(`berhasil fetch transaction`);
+        })
+        .catch(err => {
+            console.log(err, 'error get product by barcode');
+            alert(`Gagal fetch transaction`);
         })
         .finally(() => {
             dispatch(setLoading(false))

@@ -9,10 +9,10 @@ import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import convertRp from '../../helpers/convertRp';
-import { deleteCart } from '../../store/actions';
+import { deleteCart, setTotal } from '../../store/actions';
 
 export default function Transaction({navigation}) {
-  const [total, setTotal] = useState(0)
+  const total = useSelector(state => state.total)
   const username = getUsername._W
   const carts = useSelector(state => state.cart)
   const dispatch = useDispatch()
@@ -20,9 +20,9 @@ export default function Transaction({navigation}) {
   useEffect(() => {
     let subTotal = 0
     for (let i = 0; i < carts.length; i++) {
-      subTotal += (carts[i].price * carts[i].qty)
+      subTotal += (carts[i].price * carts[i].quantity)
     }
-    setTotal(subTotal)
+    dispatch(setTotal(subTotal))
   })
 
   function clearCart() {
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   totalPrice: {
-    // width: widthPercentageToDP('42.5%'),
     textAlign: 'right',
     fontFamily: 'Roboto',
     fontSize: widthPercentageToDP('7%'),

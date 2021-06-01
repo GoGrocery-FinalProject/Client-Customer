@@ -7,24 +7,24 @@ import ActionBox from '../Component/ActionBox';
 import StatusBarLight from '../Component/StatusBarLight'
 import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
+import convertRp from '../../helpers/convertRp';
 
 export default function HistoryDetail({navigation, route}) {
-    const {transactionID, transactionDate, paymentStatus,totalProduct, total} = route.params.data
-
+    const {order_id, products, totalPrice, createdAt} = route.params.data
+    const productsOK = JSON.parse(products)
     return (
     <>
     <View style={styles.container}>
         <ScrollView style={styles.scrolling}>
             <View>
                 <View style={styles.containerTitleCart}>
-                    <Text style={styles.keranjang}>Transaksi: {transactionID}</Text>
+                    <Text style={styles.keranjang}>{order_id}</Text>
             </View>
-                <CardHistory />
-                <CardHistory />
-                <CardHistory />
-                <CardHistory />
-                <CardHistory />
-                <CardHistory />
+              {
+                productsOK.map(item => {
+                  return <CardHistory key={item.id} data={item}/>
+                })
+              }
             </View>
             <View style={styles.totalContainer}>
                 <IconButton
@@ -33,10 +33,11 @@ export default function HistoryDetail({navigation, route}) {
                     color='#FB5533'
                     size={24}
                 />
-                <Text style={styles.price}>Total Pembayaran: Rp. {total},-</Text>
+                <Text style={styles.price}>Total Pembayaran: {convertRp(totalPrice)}</Text>
             </View>
-            <Text style={styles.date}>Tanggal Transaksi: {transactionDate}</Text>
-            <Text style={styles.status}>Status Pembayaran: {paymentStatus}</Text>
+            <Text style={styles.date}>Tanggal Transaksi: {createdAt.split('T')[0]}</Text>
+            <Text style={styles.date}>Waktu Transaksi: {createdAt.split('T')[1].split('.')[0]}</Text>
+            <Text style={styles.status}>Status Pembayaran: paymentStatus</Text>
         </ScrollView>
         <StatusBarLight />
     </View>

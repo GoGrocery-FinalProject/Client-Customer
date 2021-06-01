@@ -14,6 +14,7 @@ import ScanProduct from './src/Screen/ScanProduct';
 import History from './src/Screen/History';
 import HistoryDetail from './src/Screen/HistoryDetail';
 import CheckOut from './src/Screen/CheckOut';
+import MidtransWebView from './src/Screen/Midtrans';
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -32,6 +33,7 @@ export default function App() {
           <Stack.Screen name="Riwayat" component={History} options={{ headerStyle: {backgroundColor: '#FB5533'}}} />
           <Stack.Screen name="DetailRiwayat" component={HistoryDetail} options={{ headerStyle: {backgroundColor: '#0095DA'}}} />
           <Stack.Screen name="CheckOut" component={CheckOut} options={{ headerShown: false }} />
+          <Stack.Screen name="Midtrans" component={MidtransWebView} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </ReduxProvider>

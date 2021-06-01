@@ -5,25 +5,27 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import convertRp from '../../helpers/convertRp'
 
 export default function Card({data, idx}) {
-    const [qty, setQty] = useState(data.qty)
-    console.log(data.qty, ';;;;;;;');
+    const [qty, setQty] = useState(data.quantity)
+    // console.log(data.qty, ';;;;;;;');
 
     function plus() {
-        console.log(data.qty);
-        console.log(idx, 'ini index');
-        data.qty++
-        console.log(data.qty, 'after add');
+        // console.log(data.qty);
+        // console.log(idx, 'ini index');
+        data.quantity++
+        console.log(data.quantity, 'after add');
+        setQty(data.quantity)
     }
 
     function minus() {
-        console.log(data.qty);
-        console.log(idx, 'ini index');
-        data.qty--
-        console.log(data.qty, 'after min');
+        // console.log(data.qty);
+        // console.log(idx, 'ini index');
+        data.quantity--
+        console.log(data.quantity, 'after min');
+        setQty(data.quantity)
     }
 
     function onChangeQty(value) {
-        data.qty = value
+        data.quantity = value
         setQty(value)
     }
 

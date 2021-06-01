@@ -18,6 +18,15 @@ export const setName = async (name) => {
     }
 }
 
+export const setUserId = async (userId) => {
+    try {
+        await AsyncStorage.setItem('userId', userId)
+        console.log(userId, 'userId di async');
+    } catch (err) {
+        console.log(err, '<<<<<<<<<<error async storage userId');
+    }
+}
+
 export const checkToken = async (navigation) => {
     try {
         const token = await AsyncStorage.getItem('access_token')
@@ -34,6 +43,7 @@ export const checkToken = async (navigation) => {
 
 export const getToken = AsyncStorage.getItem('access_token')
 export const getUsername = AsyncStorage.getItem('name')
+export const getUserId = AsyncStorage.getItem('userId')
 
 export const clearAsyncStorage = async (navigation) => {
     try {

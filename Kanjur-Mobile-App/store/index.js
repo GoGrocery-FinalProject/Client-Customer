@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux"
 import thunk from 'redux-thunk'
-import { SET_CART, SET_LOADING, SET_ERROR, SET_USER, DELETE_CART } from './constants'
+import { SET_CART, SET_LOADING, SET_ERROR, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION } from './constants'
 import { middlewares } from "./middlewares"
 
 const initialState = {
@@ -8,6 +8,8 @@ const initialState = {
     loading: true,
     error: null,
     user: {},
+    total: 0,
+    transaction : [],
     bannerHome: 'https://www.static-src.com/siva/asset//05_2021/BPD27-GADGET-MOB.jpg',
     banner: [
         "https://static-siplah.blibli.com/static/img/banner-desktop.c6b8521.png",
@@ -25,6 +27,10 @@ function reducer (state = initialState, action) {
             return {...state, cart : payload}
         case DELETE_CART:
             return {...state, cart : []}
+        case SET_TOTAL:
+            return {...state, total : payload}
+        case SET_TRANSACTION:
+            return {...state, transaction : payload }
         case SET_LOADING:
             return {...state, loading : payload}
         case SET_ERROR:
