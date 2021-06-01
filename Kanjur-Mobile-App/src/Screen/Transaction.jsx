@@ -79,11 +79,11 @@ export default function Transaction({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F4F4'
+    backgroundColor: '#F4F4F4',
   },
   boxHeader: {
     width: widthPercentageToDP('100%'),
-    height: heightPercentageToDP('29%'),
+    height: heightPercentageToDP('26.5%'),
     backgroundColor: '#0095DA',
     marginBottom: heightPercentageToDP('9.5%'),
   },
@@ -97,13 +97,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'space-between',
-    marginHorizontal: widthPercentageToDP('5%')
+    marginHorizontal: widthPercentageToDP('5%'),
+    marginVertical: heightPercentageToDP('1%')
   },
   userContainer: {
     marginTop: Platform.OS === 'android'? StatusBar.currentHeight : 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    paddingTop: heightPercentageToDP('0.7%')
   },
   total: {
     width: widthPercentageToDP('42.5%'),

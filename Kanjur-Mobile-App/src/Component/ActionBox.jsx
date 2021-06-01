@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     height: heightPercentageToDP('16%'),
     width: widthPercentageToDP('90%'),
     left: widthPercentageToDP('5%'),
-    top: heightPercentageToDP('21%'),
+    top: heightPercentageToDP('18.5%'),
     borderRadius: 5,
     flexDirection: 'row',
     textAlign: 'center',
