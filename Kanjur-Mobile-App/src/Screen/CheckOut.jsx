@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { useDispatch } from 'react-redux';
 import convertRp from '../../helpers/convertRp';
+import getTransactionByOrderId from '../../store/actions';
 
 export default function CheckOut({navigation, route}) {
   const {link, order_id, total} = route.params
+  const dispatch = useDispatch()
 
   function detailBelanja() {
-    console.log('detailnya');
+    // console.log('detailnya');
+    dispatch(getTransactionByOrderId(order_id, navigation))
   }
 
   return (

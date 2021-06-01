@@ -131,7 +131,7 @@ export function paymentMidtrans(carts, total, navigation) {
         .then(response => {
             console.log(response.data.order_id, 'response order_id payment');
             console.log(response.data.link, ';;;;;;;;;;;;;;;;');
-            navigation.navigate('Midtrans', {link: response.data.link, total: total})
+            navigation.navigate('Midtrans', {link: response.data.link, total: total, order_id: response.data.order_id})
             dispatch(deleteCart())
             alert(`Berhasil masuk ke menu pembayaran`);
         })
@@ -193,6 +193,31 @@ export function googleLogin(navigation, name, email) {
         .catch(err => {
             console.log(err, 'error login google');
             alert(`Gagal Login dengan Google`);
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+    }
+}
+
+export default function getTransactionByOrderId(order_id, navigation) {
+    console.log(order_id, 'masuk');
+    return function (dispatch) {
+        dispatch(setLoading(true))
+        axios({
+            method: 'GET',
+            url: baseURL + 'transactions/orderid/' + order_id,
+            headers: {
+                token: getToken._W
+            }
+        })
+        .then(data => {
+            console.log(data.data, 'hasil dari getTransaction by orderId');
+            navigation.navigate('DetailRiwayat', {data: data.data})
+        })
+        .catch(err => {
+            console.log(err, 'error dari getTransaction by orderId');
+            alert('Error mendapatkan transaksi')
         })
         .finally(() => {
             dispatch(setLoading(false))
