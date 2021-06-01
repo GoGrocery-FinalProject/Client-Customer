@@ -1,11 +1,15 @@
 import axios from 'axios';
-import { setName, setToken } from '../asyncStorage';
-import { SET_CART, SET_ERROR, SET_LOADING, SET_USER } from './constants'
+import { getToken, setName, setToken } from '../asyncStorage';
+import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART } from './constants'
 
 const baseURL ='https://kanjur-test.herokuapp.com/'
 
 export function setCart(payload) {
     return ({type: SET_CART, payload})
+}
+
+export function deleteCart(payload) {
+    return ({type: DELETE_CART, payload})
 }
 
 export function setLoading(payload) {
@@ -22,7 +26,7 @@ export function setUser(payload) {
 
 export function postRegister(data) {
     return function (dispatch) {
-        // console.log('masuk')
+        console.log('masuk')
         dispatch(setLoading(true))
         axios({
             method: 'POST',
@@ -31,9 +35,11 @@ export function postRegister(data) {
         })
         .then(data => {
             dispatch(setUser(data.data))
+            alert('Register berhasil')
         })
         .catch(err => {
             console.log(err);
+            alert('Register Gagal')
         })
         .finally(() => {
             dispatch(setLoading(false))
@@ -41,9 +47,9 @@ export function postRegister(data) {
     }
 }
 
-export function postLogin(data) {
+export function postLogin(data, navigation) {
+    console.log(data, 'ini data login');
     return function (dispatch) {
-        setName(data.email)
         dispatch(setLoading(true))
         axios({
             method: 'POST',
@@ -52,9 +58,39 @@ export function postLogin(data) {
         })
         .then(data => {
             setToken(data.data.token)
+            setName(data.data.name)
+            alert('Login berhasil')
+            navigation.navigate('CheckIn')
         })
         .catch(err => {
             console.log(err, 'error post Login');
+            alert('Login gagal')
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+    }
+}
+
+export function getProductByBarcode(barcode) {
+    return function (dispatch) {
+        dispatch(setLoading(true))
+        axios({
+            method: 'GET',
+            url: baseURL + 'products/' + barcode,
+            headers: {
+                token: getToken._W
+            } 
+        })
+        .then(data => {
+            data.data.qty = 1
+            console.log(data.data, '<<<<<<<<<<<<berhasil hit')
+            dispatch(setCart(data.data))
+            alert(`Produk berhasil ditambahkan ke keranjang`);
+        })
+        .catch(err => {
+            console.log(err, 'error get product by barcode');
+            alert(`Gagal tambahkan product`);
         })
         .finally(() => {
             dispatch(setLoading(false))

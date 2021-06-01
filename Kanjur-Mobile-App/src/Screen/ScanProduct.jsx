@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { useDispatch } from 'react-redux';
+import { getProductByBarcode } from '../../store/actions';
 
-export default function ScanProduct() {
+export default function ScanProduct({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
@@ -16,7 +19,8 @@ export default function ScanProduct() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     //HIt ke server berdasar barcode
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    dispatch(getProductByBarcode(data))
+    navigation.navigate('Transaction')
   };
 
   if (hasPermission === null) {

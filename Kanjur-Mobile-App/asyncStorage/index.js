@@ -18,13 +18,13 @@ export const setName = async (name) => {
     }
 }
 
-export const getToken = async (navigation) => {
+export const checkToken = async (navigation) => {
     try {
         const token = await AsyncStorage.getItem('access_token')
         if(token === null) {
             navigation.replace('Home')
         } else {
-            navigation.replace('Transaction')
+            navigation.replace('CheckIn')
         }
         return token
     } catch (e) {
@@ -32,6 +32,7 @@ export const getToken = async (navigation) => {
     }
 }
 
+export const getToken = AsyncStorage.getItem('access_token')
 export const getUsername = AsyncStorage.getItem('name')
 
 export const clearAsyncStorage = async (navigation) => {

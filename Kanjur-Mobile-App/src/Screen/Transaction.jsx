@@ -7,13 +7,15 @@ import ActionBox from '../Component/ActionBox';
 import StatusBarLight from '../Component/StatusBarLight'
 import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import convertRp from '../../helpers/convertRp';
+import { deleteCart } from '../../store/actions';
 
 export default function Transaction({navigation}) {
   const [total, setTotal] = useState(0)
   const username = getUsername._W
   const carts = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     let subTotal = 0
@@ -22,6 +24,10 @@ export default function Transaction({navigation}) {
     }
     setTotal(subTotal)
   })
+
+  function clearCart() {
+    dispatch(deleteCart())
+  }
 
   return (
     <>
@@ -43,7 +49,7 @@ export default function Transaction({navigation}) {
         <View>
           <View style={styles.containerTitleCart}>
             <Text style={styles.keranjang}>Keranjang Belanja</Text>
-            <IconButton icon="delete" size={widthPercentageToDP('5%')} color="red" onPress={() => console.log('CLEAR CART')} />
+            <IconButton icon="delete" size={widthPercentageToDP('5%')} color="red" onPress={() => clearCart()} />
           </View>
           {
             carts.map((el, idx) => {

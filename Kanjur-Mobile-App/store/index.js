@@ -1,34 +1,10 @@
 import { applyMiddleware, createStore } from "redux"
 import thunk from 'redux-thunk'
-import { SET_CART, SET_LOADING, SET_ERROR, SET_USER } from './constants'
+import { SET_CART, SET_LOADING, SET_ERROR, SET_USER, DELETE_CART } from './constants'
+import { middlewares } from "./middlewares"
 
 const initialState = {
-    cart: [{
-        "id": 1,
-        "name": "Taro Snack Net Seaweed Pck 70G",
-        "image_url": "https://assets.klikindomaret.com/share/20055205/20055205_1.jpg",
-        "description": "Rasa Seaweed ukuran 70 Gram",
-        "barcode_number": "1414100003",
-        "stock": 18,
-        "price": 9500,
-        "stockBefore": 5,
-        "createdAt": "2021-05-30T04:16:35.484Z",
-        "updatedAt": "2021-05-30T09:20:01.831Z",
-        "qty" : 1
-    },
-    {
-        "id": 2,
-        "name": "Taro Snack Net Seaweed Pck 70G",
-        "image_url": "https://assets.klikindomaret.com/share/20055205/20055205_1.jpg",
-        "description": "Rasa Seaweed ukuran 70 Gram",
-        "barcode_number": "1414100003",
-        "stock": 18,
-        "price": 5000,
-        "stockBefore": 5,
-        "createdAt": "2021-05-30T04:16:35.484Z",
-        "updatedAt": "2021-05-30T09:20:01.831Z",
-        "qty" : 2
-    }],
+    cart: [],
     loading: true,
     error: null,
     user: {},
@@ -46,7 +22,9 @@ function reducer (state = initialState, action) {
     const {type, payload} = action
     switch (type) {
         case SET_CART:
-            return {...state, card : payload}
+            return {...state, cart : payload}
+        case DELETE_CART:
+            return {...state, cart : []}
         case SET_LOADING:
             return {...state, loading : payload}
         case SET_ERROR:
@@ -58,4 +36,4 @@ function reducer (state = initialState, action) {
     }
 }
 
-export const store = createStore(reducer, applyMiddleware(thunk))
+export const store = createStore(reducer, applyMiddleware(thunk, middlewares))

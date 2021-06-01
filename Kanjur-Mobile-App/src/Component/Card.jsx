@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native'
-import { Avatar, Button } from 'react-native-paper'
+import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Avatar, Button, TextInput } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import convertRp from '../../helpers/convertRp'
 
 export default function Card({data, idx}) {
-    useEffect(() => {
-        console.log('use Effect');
-    }, [data.qty])
+    const [qty, setQty] = useState(data.qty)
+    console.log(data.qty, ';;;;;;;');
 
     function plus() {
         console.log(data.qty);
@@ -23,10 +22,9 @@ export default function Card({data, idx}) {
         console.log(data.qty, 'after min');
     }
 
-    //funsinya masih ngacoooo
     function onChangeQty(value) {
         data.qty = value
-        console.log(data.qty);
+        setQty(value)
     }
 
     return (
@@ -42,15 +40,15 @@ export default function Card({data, idx}) {
                     <TouchableOpacity style={styles.plusminus} onPress={() => minus()}>
                         <Text style={styles.qtyText}>-</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.plusminus}>
-                        {/* <TextInput style={styles.qtyText}>{data.qty}</TextInput> */}
-                        <TextInput
-        style={styles.qtyText}
-        onChangeText={onChangeQty}
-        value={data.qty.toString()}
-        // placeholder={data.qty}
-      />
-                    </TouchableOpacity>
+                    <TextInput
+                        width={widthPercentageToDP('10%')}
+                        dense={true}
+                        paddingVertical={0}
+                        mode='outlined'
+                        style={styles.formInput}
+                        value={qty.toString()}
+                        onChangeText={qty => onChangeQty(qty)}
+                    />
                     <TouchableOpacity style={styles.plusminus} onPress={() => plus()}>
                         <Text style={styles.qtyText}>+</Text>
                     </TouchableOpacity>
@@ -81,18 +79,19 @@ const styles = StyleSheet.create({
     plusminus: {
         backgroundColor: '#fff',
         paddingHorizontal: widthPercentageToDP('3%'),
-        borderColor: '#d4d4d4',
+        // borderColor: '#d4d4d4',
         fontWeight: 'bold',
-        borderWidth: 1,
+        // borderWidth: 1,
         marginVertical: heightPercentageToDP('1%'),
         paddingVertical: widthPercentageToDP('1%')
     },
     buttonQty: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     qtyText: {
         fontFamily: 'Roboto',
-        fontSize: widthPercentageToDP('4%'),
+        fontSize: widthPercentageToDP('5%'),
         fontWeight: 'bold'
     },
     price: {

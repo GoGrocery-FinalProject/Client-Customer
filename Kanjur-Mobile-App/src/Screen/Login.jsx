@@ -15,8 +15,7 @@ export default function Login({navigation}) {
 
     function login() {
       // setToken(email)
-      dispatch(postLogin({email, password}))
-      navigation.navigate('CheckIn')
+      dispatch(postLogin({email, password}, navigation))
     }
     return (
       <View style={styles.container}>
