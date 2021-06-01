@@ -9,24 +9,36 @@ import { Avatar, IconButton } from 'react-native-paper';
 import { clearAsyncStorage, getUsername } from '../../asyncStorage';
 import { useDispatch, useSelector } from 'react-redux';
 import convertRp from '../../helpers/convertRp';
-import { deleteCart, setTotal } from '../../store/actions';
+import { deleteCart, loadSetTotal, setLoading, setTotal } from '../../store/actions';
+import ScreenLoading from './Loading';
+import ScreenError from './Error';
 
 export default function Transaction({navigation}) {
   const total = useSelector(state => state.total)
   const username = getUsername._W
   const carts = useSelector(state => state.cart)
   const dispatch = useDispatch()
+  const loading = useSelector(state => state.loading)
+  const error = useSelector(state => state.error)
 
   useEffect(() => {
     let subTotal = 0
-    for (let i = 0; i < carts.length; i++) {
-      subTotal += (carts[i].price * carts[i].quantity)
-    }
+      for (let i = 0; i < carts.length; i++) {
+        subTotal += (carts[i].price * carts[i].quantity)
+      }
     dispatch(setTotal(subTotal))
   })
 
   function clearCart() {
     dispatch(deleteCart())
+  }
+
+  if (loading) {
+    return <ScreenLoading />
+  }
+
+  if (error) {
+    return <ScreenError />
   }
 
   return (

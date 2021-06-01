@@ -4,30 +4,34 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { useSelector } from 'react-redux';
 import CardTransaction from '../Component/CardTransaction';
+import ScreenError from './Error';
+import ScreenLoading from './Loading';
 
 export default function History({navigation}) {
-    // const transaction = {
-    //     transactionID : 'ABCDEF12345',
-    //     transactionDate : '30 Mei 2021',
-    //     paymentStatus : 'Dibayar',
-    //     totalProduct : 10,
-    //     total : 75000
-    // }
 
-    const transactions = useSelector(state => state.transaction)
+  const transactions = useSelector(state => state.transaction)
+  const loading = useSelector(state => state.loading)
+  const error = useSelector(state => state.error)
+
+  if (loading) {
+    return <ScreenLoading />
+  }
+
+  if (error) {
+    return <ScreenError />
+  }
  
   return (
-      <View style={styles.container}>
-          <ScrollView>
-        <Text>{JSON.stringify(transactions, null, 2)}</Text>
-            {
-              transactions.map(transaction => {
-                return <CardTransaction key={transaction.id} navigation={navigation} transaction={transaction}/>
-              })
-            }
-          </ScrollView>
-        <StatusBar style="auto" />
-      </View>
+    <View style={styles.container}>
+      <ScrollView>
+        {
+          transactions.map(transaction => {
+            return <CardTransaction key={transaction.id} navigation={navigation} transaction={transaction}/>
+          })
+        }
+      </ScrollView>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

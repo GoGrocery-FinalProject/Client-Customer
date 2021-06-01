@@ -10,7 +10,7 @@ import { clearAsyncStorage, getUsername } from '../../asyncStorage';
 import convertRp from '../../helpers/convertRp';
 
 export default function HistoryDetail({navigation, route}) {
-    const {order_id, products, totalPrice, createdAt} = route.params.data
+    const {order_id, products, totalPrice, createdAt, status} = route.params.data
     const productsOK = JSON.parse(products)
     return (
     <>
@@ -37,7 +37,7 @@ export default function HistoryDetail({navigation, route}) {
             </View>
             <Text style={styles.date}>Tanggal Transaksi: {createdAt.split('T')[0]}</Text>
             <Text style={styles.date}>Waktu Transaksi: {createdAt.split('T')[1].split('.')[0]}</Text>
-            <Text style={styles.status}>Status Pembayaran: paymentStatus</Text>
+            <Text style={styles.status}>Status Pembayaran: {status}</Text>
         </ScrollView>
         <StatusBarLight />
     </View>

@@ -131,7 +131,7 @@ export function paymentMidtrans(carts, total, navigation) {
         .then(response => {
             console.log(response.data.order_id, 'response order_id payment');
             console.log(response.data.link, ';;;;;;;;;;;;;;;;');
-            navigation.navigate('Midtrans', {link: response.data.link})
+            navigation.navigate('Midtrans', {link: response.data.link, total: total})
             dispatch(deleteCart())
             alert(`Berhasil masuk ke menu pembayaran`);
         })

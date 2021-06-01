@@ -5,7 +5,7 @@ import { middlewares } from "./middlewares"
 
 const initialState = {
     cart: [],
-    loading: true,
+    loading: false,
     error: null,
     user: {},
     total: 0,

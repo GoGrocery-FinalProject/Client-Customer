@@ -5,13 +5,13 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import convertRp from '../../helpers/convertRp'
 
 export default function CardHistory({data}) {
-    const {id, name, price, quantity} = data
+    const {id, name, price, quantity, image_url, description} = data
     return (
         <View style={styles.container}>
-            <Avatar.Image style={styles.card} size={widthPercentageToDP('20%')} source={{ uri: 'https://awsimages.detik.net.id/community/media/visual/2020/09/26/snack-jepang-yang-ditawarkan-via-jastip-4.png?w=448'}} />
+            <Avatar.Image style={styles.card} size={widthPercentageToDP('20%')} source={{ uri: image_url}} />
             <View style={styles.boxName}>
                 <Text style={styles.title}>{name}</Text>
-                <Text style={styles.detail}>100 gr</Text>
+                <Text style={styles.detail}>{description}</Text>
             </View>
             <View style={styles.boxPrice}>
                 <Text style={styles.price}>{convertRp(price)}</Text>

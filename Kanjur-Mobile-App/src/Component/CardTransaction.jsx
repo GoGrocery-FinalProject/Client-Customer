@@ -24,7 +24,7 @@ export default function CardTransaction({navigation, transaction}) {
         <TouchableOpacity style={styles.container} onPress={() => detailTransaksi()}>
             <View style={styles.header}>
                 <Text style={styles.price}>{transaction.order_id}</Text>
-                <Text style={styles.price}>payment status</Text>
+                <Text style={styles.price}>{transaction.status}</Text>
             </View>
             <View style={styles.body}>
                 <Text style={styles.detail}>Tanggal Transaksi: {transaction.createdAt.split('T')[0]}</Text>

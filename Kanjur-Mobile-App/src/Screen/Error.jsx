@@ -2,11 +2,11 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function ScreenLoading({navigation}) {
+export default function ScreenError({navigation}) {
 
     return (
         <View style={styles.container}>
-        <Text style={styles.text}>Loading ...</Text>
+        <Text style={styles.text}>Error ...</Text>
         <StatusBar style="auto" />
       </View>
   );

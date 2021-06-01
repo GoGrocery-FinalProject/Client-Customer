@@ -12,7 +12,7 @@ export default function MidtransWebView({ navigation, route }) {
 			source={{ uri: route.params.link }}
 			style={{ marginTop: 20 }}
 		/>
-		<Button mode="text" style={styles.button} color='#fff' onPress={() => navigation.navigate('CheckOut', {link: route.params.link, order_id: route.params.order_id})}>Kembali ke Aplikasi</Button>
+		<Button mode="text" style={styles.button} color='#fff' onPress={() => navigation.navigate('CheckOut', {link: route.params.link, order_id: route.params.order_id, total: route.params.total})}>Kembali ke Aplikasi</Button>
 		</>
 	)
 }

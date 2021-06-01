@@ -3,11 +3,12 @@ import { Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { setBarcode } from '../../asyncStorage';
+import { getUsername, setBarcode } from '../../asyncStorage';
 
 export default function CheckIn({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const username = getUsername._W
 
   useEffect(() => {
     (async () => {
@@ -31,7 +32,7 @@ export default function CheckIn({navigation}) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
-      <Text style={styles.title}>Hallo Customer,</Text>
+      <Text style={styles.title}>Hallo {username},</Text>
       <Text style={styles.subTitle}>Selamat berbelanja di Kanjur!</Text>
 
         {

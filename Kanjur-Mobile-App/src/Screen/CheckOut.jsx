@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { Button } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { useSelector } from 'react-redux';
 import convertRp from '../../helpers/convertRp';
 
 export default function CheckOut({navigation, route}) {
-  const total = useSelector(state => state.total)
-  const {link, order_id} = route.params
+  const {link, order_id, total} = route.params
 
   function detailBelanja() {
     console.log('detailnya');

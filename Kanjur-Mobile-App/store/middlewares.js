@@ -1,4 +1,4 @@
-import { SET_CART } from "./constants"
+import { SET_CART, SET_TOTAL } from "./constants"
 
 
 export function middlewares (store) {
@@ -9,6 +9,12 @@ export function middlewares (store) {
                 carts.push(action.payload)
                 console.log(carts, '<<<<<<<<<<<setelah push');
                 next({...action, payload: carts})
+            // } else if (action.type === SET_TOTAL) {
+            //     let subTotal = 0
+            //     for (let i = 0; i < carts.length; i++) {
+            //         subTotal += (carts[i].price * carts[i].quantity)
+            //     }
+            //     next({...action, payload: subTotal})
             } else {
                 next(action)
             }
