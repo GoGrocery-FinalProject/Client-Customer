@@ -4,7 +4,7 @@ import { Avatar, Button, TextInput } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { useDispatch } from 'react-redux'
 import convertRp from '../../helpers/convertRp'
-import { deleteCartByIndex, setLoading } from '../../store/actions'
+import { deleteCartByIndex, setLoading, setQuantityChange } from '../../store/actions'
 
 export default function Card({data, idx}) {
     const [qty, setQty] = useState(data.quantity)
@@ -12,24 +12,33 @@ export default function Card({data, idx}) {
 
     function plus() {
         dispatch(setLoading(true))
-        data.quantity++
-        if (data.quantity === 0) {
+        let newQt = data.quantity + 1
+        if (newQt === 0) {
             console.log('ganti');
             dispatch(deleteCartByIndex(idx))
         } else {
-            console.log(data.quantity, 'after add');
+            const payload = {
+                idx,
+                newQt
+            }
+            dispatch(setQuantityChange(payload))
             setQty(data.quantity)
         } 
     }
 
     function minus() {
         dispatch(setLoading(true))
-        data.quantity--
-        if (data.quantity === 0) {
+        let newQt = data.quantity - 1
+        if (newQt === 0) {
             console.log('ganti');
             dispatch(deleteCartByIndex(idx))
         } else {
             console.log(data.quantity, 'after min');
+            const payload = {
+                idx,
+                newQt
+            }
+            dispatch(setQuantityChange(payload))
             setQty(data.quantity)
         } 
     }
