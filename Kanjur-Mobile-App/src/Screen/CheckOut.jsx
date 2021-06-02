@@ -17,7 +17,7 @@ export default function CheckOut({navigation, route}) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
+      <Image style={styles.logo} source={require('../../assets/logo-horizontal-dark-transparan.png')} />
       <Text style={styles.title}>Terima Kasih sudah berbelanja di Kanjur :)</Text>
       <Text style={styles.text}>Anda telah berbelanja sebanyak :</Text>
       <Text style={styles.price}>{convertRp(total)}</Text>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: widthPercentageToDP('50%'),
+    width: widthPercentageToDP('70%'),
     height: heightPercentageToDP('10%'),
     marginBottom: heightPercentageToDP('4%')
   },

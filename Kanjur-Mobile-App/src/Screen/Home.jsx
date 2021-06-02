@@ -3,14 +3,12 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import { useSelector } from 'react-redux';
 
 export default function Home({navigation}) {
-  const bannerHome = useSelector(state => state.bannerHome)
  
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: bannerHome}} />
+      <Image style={styles.image} source={require('../../assets/bannerHome.png')} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Selamat datang di Kantin Jujur</Text>
         <Text style={styles.text}>Kami menyediakan berbagai macam snack dan kebutuhan pokok, kami tidak menyediakan kasir. Disini kejujuran kalian diuji.</Text>

@@ -5,7 +5,12 @@ import { useSelector } from 'react-redux';
 import { SliderBox } from 'react-native-image-slider-box'
 
 export default function Slider({navigation}) {
-  const banner = useSelector(state => state.banner)
+  const banner = [
+    require("../../assets/banner1.png"),
+    require("../../assets/banner2.png"),
+    require("../../assets/banner3.png"),
+    require("../../assets/banner4.png")
+  ]
 
   return (
     <SliderBox 

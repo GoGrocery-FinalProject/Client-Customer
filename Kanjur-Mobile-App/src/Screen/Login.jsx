@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, LogBox } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { Button } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { googleLogin, postLogin } from '../../store/actions';
 
 import * as firebase from 'firebase'
@@ -15,7 +15,6 @@ LogBox.ignoreLogs(['Deprecated: Native Google Sign-In has been moved to Expo.Goo
 export default function Login({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const logo = useSelector(state => state.logo)
     const dispatch = useDispatch()
 
     if (!firebase.apps.length) {
@@ -51,7 +50,7 @@ export default function Login({navigation}) {
 
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={{ uri: logo}} />
+        <Image style={styles.logo} source={require('../../assets/logo-horizontal-light.png')} />
         <TextInput 
           style={styles.input} 
           placeholder="Email / No Telepon"
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontWeight: 'bold',
@@ -126,8 +124,8 @@ const styles = StyleSheet.create({
       marginVertical: heightPercentageToDP('1.5%'),
   },
   logo: {
-      width: widthPercentageToDP('50%'),
+      width: widthPercentageToDP('70%'),
       height: heightPercentageToDP('10%'),
-      marginBottom: heightPercentageToDP('2%')
+      marginVertical: heightPercentageToDP('2%')
   }
 });

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Kanjur-Mobile-App",
-    "slug": "Kanjur-Mobile-App",
+    "name": "Go-Grocery",
+    "slug": "Go-Grocery",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-dark.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

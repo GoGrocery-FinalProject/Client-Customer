@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductByBarcode, setFixedCart, setLoading } from '../../store/actions';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 
 export default function ScanProduct({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -59,5 +60,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-  },
+  }
 });

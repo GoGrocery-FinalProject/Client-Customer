@@ -31,7 +31,7 @@ export default function CheckIn({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={{ uri: 'https://library.kissclipart.com/20180904/ege/kissclipart-logo-blibli-clipart-blibli-com-logo-indonesia-8a27c76836cbc048.jpg'}} />
+      <Image style={styles.logo} source={require('../../assets/logo-horizontal-dark-transparan.png')} />
       <Text style={styles.title}>Hallo {username},</Text>
       <Text style={styles.subTitle}>Selamat berbelanja di Kanjur!</Text>
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: widthPercentageToDP('50%'),
+    width: widthPercentageToDP('70%'),
     height: heightPercentageToDP('10%'),
     marginBottom: heightPercentageToDP('4%')
   },

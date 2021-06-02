@@ -173,7 +173,7 @@ export function getTransaction() {
         .then(data => {
             console.log(data.data.transactions, 'ini balikan transaction');
             dispatch(setTransaction(data.data.transactions))
-            alert(`berhasil fetch transaction`);
+            // alert(`berhasil fetch transaction`);
         })
         .catch(err => {
             console.log(err, 'error get product by barcode');

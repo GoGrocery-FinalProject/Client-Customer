@@ -49,13 +49,12 @@ export default function Register({navigation, route}) {
 
   function register(data) {
     dispatch(postRegister(data))
-    // console.log(data, 'data');
     navigation.navigate('Home')
   }
 
   return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={{ uri: logo}} />
+        <Image style={styles.logo} source={require('../../assets/logo-horizontal-light.png')} />
         <TextInput 
             style={styles.input} 
             placeholder="Nama"
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   title: {
     fontWeight: 'bold',
@@ -142,8 +141,8 @@ const styles = StyleSheet.create({
       marginVertical: heightPercentageToDP('1.5%'),
   },
   logo: {
-      width: widthPercentageToDP('50%'),
+      width: widthPercentageToDP('70%'),
       height: heightPercentageToDP('10%'),
-      marginBottom: heightPercentageToDP('2%')
+      marginVertical: heightPercentageToDP('2%')
   }
 });

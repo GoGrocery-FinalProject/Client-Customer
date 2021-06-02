@@ -3,19 +3,18 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image } from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import { checkToken } from '../../asyncStorage';
-import { useSelector } from 'react-redux';
 
 export default function Splash({navigation}) {
-  const logo = useSelector(state => state.logo)
+
   useEffect(() => {
-      setTimeout(() => {
-          checkToken(navigation)
-      }, 3000)
+    setTimeout(() => {
+      checkToken(navigation)
+    }, 3000)
   })
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={{uri: logo}} />
+      <Image style={styles.logo} source={require('../../assets/logo-horizontal-dark-transparan.png')} />
       <StatusBar style="auto" />
     </View>
   );
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: widthPercentageToDP('50%'),
+    width: widthPercentageToDP('70%'),
     height: heightPercentageToDP('10%')
   }
 });
