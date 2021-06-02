@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductByBarcode } from '../../store/actions';
+import { getProductByBarcode, setFixedCart, setLoading } from '../../store/actions';
 
 export default function ScanProduct({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -22,7 +22,11 @@ export default function ScanProduct({navigation}) {
     let flag = true
     for (let i = 0; i < carts.length; i++) {
       if (carts[i].barcode_number === data) {
-        carts[i].quantity++
+        dispatch(setLoading(true))
+        let dupecart = [...carts]
+        dupecart[i].quantity++
+        dispatch(setFixedCart(dupecart))
+        navigation.navigate('Transaction')
         flag = false
       }
     }

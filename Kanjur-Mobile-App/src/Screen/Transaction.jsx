@@ -27,7 +27,8 @@ export default function Transaction({navigation}) {
         subTotal += (carts[i].price * carts[i].quantity)
       }
     dispatch(setTotal(subTotal))
-  })
+    dispatch(setLoading(false))
+  },[carts, total])
 
   function clearCart() {
     dispatch(deleteCart())

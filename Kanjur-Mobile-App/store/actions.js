@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { getToken, getUserId, getUsername, setName, setToken, setUserId } from '../asyncStorage';
-import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION, DELETE_CART_BYINDEX } from './constants'
+import { SET_CART, SET_ERROR, SET_LOADING, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION, DELETE_CART_BYINDEX, SET_FIXED_CART } from './constants'
 
 const baseURL ='https://kanjur-test.herokuapp.com/'
 
 export function setCart(payload) {
     return ({type: SET_CART, payload})
+}
+
+export function setFixedCart(payload) {
+    return ({type: SET_FIXED_CART, payload})
 }
 
 export function deleteCart(payload) {
@@ -141,6 +145,7 @@ export function paymentMidtrans(carts, total, navigation) {
             alert(`Berhasil masuk ke menu pembayaran`);
         })
         .catch(err => {
+            console.log(err.response.data.message)
             console.log(err, 'error payment midtrans');
             alert(`Gagal melakukan pembayaran`);
         })
