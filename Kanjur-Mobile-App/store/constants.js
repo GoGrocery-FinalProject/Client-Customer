@@ -1,4 +1,5 @@
 export const SET_CART = 'cart/setCart'
+export const SET_FIXED_CART = 'cart/setFixedCart'
 export const DELETE_CART = 'cart/deleteCart'
 export const DELETE_CART_BYINDEX = 'cart/deleteCartByIndex'
 export const SET_LOADING = 'loading/setLoading'

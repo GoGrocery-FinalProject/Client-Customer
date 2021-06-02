@@ -4,13 +4,14 @@ import { Avatar, Button, TextInput } from 'react-native-paper'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { useDispatch } from 'react-redux'
 import convertRp from '../../helpers/convertRp'
-import { deleteCartByIndex } from '../../store/actions'
+import { deleteCartByIndex, setLoading } from '../../store/actions'
 
 export default function Card({data, idx}) {
     const [qty, setQty] = useState(data.quantity)
     const dispatch = useDispatch()
 
     function plus() {
+        dispatch(setLoading(true))
         data.quantity++
         if (data.quantity === 0) {
             console.log('ganti');
@@ -22,6 +23,7 @@ export default function Card({data, idx}) {
     }
 
     function minus() {
+        dispatch(setLoading(true))
         data.quantity--
         if (data.quantity === 0) {
             console.log('ganti');
@@ -33,6 +35,7 @@ export default function Card({data, idx}) {
     }
 
     function onChangeQty(value) {
+        dispatch(setLoading(true))
         console.log(value ,'/////////', idx);
         if (+value === 0) {
             console.log('ganti');
