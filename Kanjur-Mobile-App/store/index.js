@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux"
 import thunk from 'redux-thunk'
-import { SET_CART, SET_LOADING, SET_ERROR, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION, DELETE_CART_BYINDEX, SET_FIXED_CART } from './constants'
+import { SET_CART, SET_LOADING, SET_ERROR, SET_USER, DELETE_CART, SET_TOTAL, SET_TRANSACTION, DELETE_CART_BYINDEX, SET_FIXED_CART, SET_QTC } from './constants'
 import { middlewares } from "./middlewares"
 
 const initialState = {
@@ -27,6 +27,10 @@ function reducer (state = initialState, action) {
             return {...state, cart : payload}
         case SET_FIXED_CART:
             return {...state, cart : payload}
+        case SET_QTC:
+            let dupeCart = [...state.cart]
+            dupeCart[payload.idx].quantity = payload.newQt
+            return {...state, cart : dupeCart}
         case DELETE_CART:
             return {...state, cart : []}
         case DELETE_CART_BYINDEX:
