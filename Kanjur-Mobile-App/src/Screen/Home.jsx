@@ -10,7 +10,8 @@ export default function Home({navigation}) {
     <View style={styles.container}>
       <Image style={styles.image} source={require('../../assets/bannerHome.png')} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Selamat datang di Go Grocery</Text>
+        <Text style={styles.title}>Selamat datang di</Text>
+        <Text style={styles.titleBottom}>Go Grocery</Text>
         <Text style={styles.text}>Go Grocery adalah swalayan modern yang menggunakan layanan otomatisasi untuk pembayaran di mana pelanggan dapat membeli barang apa pun di toko tanpa kontak dengan orang lain sama sekali. Ini menggunakan pemindaian barcode dan pembayaran elektronik untuk prosesnya.</Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -37,6 +38,12 @@ const styles = StyleSheet.create({
     marginVertical: heightPercentageToDP('3%')
   },
   title: {
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    fontSize: widthPercentageToDP('8%'),
+    color: '#0095DA',
+  },
+  titleBottom: {
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: widthPercentageToDP('8%'),
